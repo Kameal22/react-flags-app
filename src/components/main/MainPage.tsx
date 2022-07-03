@@ -1,6 +1,15 @@
+import Filter from "../filter/Filter";
+import Search from "../search/Search";
+import { MainPageStyled, MainPageSearch } from "./mainPage.styled";
+
 const MainPage: React.FC = () => {
     return (
-        <div id="mainPageDiv"></div>
+        <MainPageStyled>
+            <MainPageSearch>
+                <Search />
+                <Filter />
+            </MainPageSearch>
+        </MainPageStyled>
     )
 }
 

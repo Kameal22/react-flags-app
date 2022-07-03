@@ -11,8 +11,8 @@ export const lightTheme = {
   
 export const darkTheme = {
     background: {
-      nav: 'black',
-      container: 'grey'
+      nav: '#333533',
+      container: '#1b1c1b'
     },
     textColor: {
       nav: 'white',

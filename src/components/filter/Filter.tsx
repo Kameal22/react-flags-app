@@ -1,6 +1,10 @@
+import { FilterStyled } from "./filter.styled";
+
 const Filter: React.FC = () => {
     return (
-        <div id="filterDiv"></div>
+        <FilterStyled>
+            <p>Filter..</p>
+        </FilterStyled>
     )
 }
 

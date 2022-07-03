@@ -1,4 +1,4 @@
-import { Toggler } from "../styled/toggler.styled";
+import { Toggler } from "./toggler.styled";
 
 interface Props {
     toggleDarkMode: () => void;

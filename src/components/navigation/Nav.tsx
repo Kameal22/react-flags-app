@@ -1,5 +1,5 @@
 import DarkModeToggler from "./DarkModeToggler";
-import { NavStyled } from "../styled/nav.styled";
+import { NavStyled } from "./nav.styled";
 
 interface Props {
     toggleDarkMode: () => void;

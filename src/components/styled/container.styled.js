@@ -4,4 +4,5 @@ export const Container = styled.div`
   min-height: 90vh;
   width: 100%;
   background-color: ${({ theme }) => theme.background.container};
+  color: ${({ theme }) => theme.textColor.container};
 `;

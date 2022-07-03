@@ -1,6 +1,16 @@
-const DarkModeToggler: React.FC = () => {
+import { Toggler } from "../styled/toggler.styled";
+
+interface Props {
+    toggleDarkMode: () => void;
+    theme: string;
+}
+
+const DarkModeToggler: React.FC<Props> = ({ toggleDarkMode, theme }) => {
     return (
-        <div id="darkModeTogglerDiv"></div>
+        <Toggler onClick={() => toggleDarkMode()}>
+            {theme === "light" ? <i className="bi bi-moon"></i> : <i className="bi bi-moon-fill"></i>}
+            <p>Dark mode</p>
+        </Toggler>
     )
 }
 

@@ -1,11 +1,16 @@
 import DarkModeToggler from "./DarkModeToggler";
 import { NavStyled } from "../styled/nav.styled";
 
-const Nav: React.FC = () => {
+interface Props {
+    toggleDarkMode: () => void;
+    theme: string
+}
+
+const Nav: React.FC<Props> = ({ toggleDarkMode, theme }) => {
     return (
         <NavStyled>
             <h1>Where in the world?</h1>
-            <DarkModeToggler />
+            <DarkModeToggler toggleDarkMode={toggleDarkMode} theme={theme} />
         </NavStyled>
     )
 }

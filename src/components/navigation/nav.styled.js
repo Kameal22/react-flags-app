@@ -8,7 +8,7 @@ export const NavStyled = styled.div`
   background-color: ${({ theme }) => theme.background.nav};
   color: ${({ theme }) => theme.textColor.nav};
   h1 {
-    font-size: 1.6rem;
+    font-size: 1.4rem;
     margin-left: 5%;
   }
 `;

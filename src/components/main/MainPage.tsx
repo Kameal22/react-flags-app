@@ -13,18 +13,24 @@ import Country from "../countries/Country";
 
 const MainPage: React.FC = () => {
   const [countries, setCountries] = useState<CountryInterface[]>([]);
+  const [searchValue, setSearchValue] = useState("")
 
   useEffect(() => {
     fetchData(ALL_FLAGS_API_URL, setCountries);
   }, []);
+
+  const changeSearchValue = (value: string) => {
+    setSearchValue(value)
+  }
+
   return (
     <MainPageStyled>
       <MainPageSearchStyled>
-        <Search countries={countries} />
+        <Search value={searchValue} changeValue={changeSearchValue} />
         <Filter />
       </MainPageSearchStyled>
       <MainPageCountriesStyled>
-        {countries.map((country) => {
+        {countries.filter(country => country.name.toLocaleLowerCase().includes(searchValue)).map((country) => {
           return (
             <Country
               key={country.name}

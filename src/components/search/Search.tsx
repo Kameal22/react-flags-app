@@ -1,28 +1,26 @@
 import { SearchStyled, FormStyled, InputStyled } from "./search.styled";
 import { CountryInterface } from "../../interfaces/CountriesInterface";
+import { useState } from "react";
 
 interface Props {
-    countries: CountryInterface[]
+    value: string;
+    changeValue: (value: string) => void;
 }
 
-const Search: React.FC<Props> = ({ countries }) => {
+const Search: React.FC<Props> = ({ value, changeValue }) => {
+
     const handleChange = (
         e: React.FormEvent<HTMLInputElement>
     ): void => {
         let searchingValue = e.currentTarget.value;
-
-        const filtered = countries.filter((country) => {
-            // return board.boardName
-            //   .toLowerCase()
-            //   .includes(searchingValue.toLowerCase());
-        });
+        changeValue(searchingValue)
     };
 
     return (
         <SearchStyled>
             <FormStyled>
                 <form autoComplete="off">
-                    <InputStyled onChange={handleChange} name="search" type="text" placeholder="Search for a country" />
+                    <InputStyled onChange={handleChange} value={value} name="search" type="text" placeholder="Search for a country" />
                     <i className="bi bi-search"></i>
                 </form>
             </FormStyled>

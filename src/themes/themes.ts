@@ -1,7 +1,8 @@
 export const lightTheme = {
     background: {
       nav: 'white',
-      container: '#f7f0f5'
+      container: '#f7f0f5',
+      country: 'white'
     },
     textColor: {
       nav: 'black',
@@ -12,7 +13,8 @@ export const lightTheme = {
 export const darkTheme = {
     background: {
       nav: '#333533',
-      container: '#1b1c1b'
+      container: '#1b1c1b',
+      country: '#333533'
     },
     textColor: {
       nav: 'white',

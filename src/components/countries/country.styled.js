@@ -35,4 +35,24 @@ export const CountryStyled = styled.div`
   &:hover {
     cursor: pointer;
   }
+
+  @media screen and (max-width: 1460px) {
+    width: 30%;
+  }
+
+  @media screen and (max-width: 1250px) {
+    width: 40%;
+  }
+
+  @media screen and (max-width: 800px) {
+    width: 60%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  @media screen and (max-width: 700px) {
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+  }
 `;

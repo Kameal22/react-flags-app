@@ -3,7 +3,7 @@ import { CountryInterface } from "../interfaces/CountriesInterface";
 
 export const fetchData = async (URL: string, setCountries: React.Dispatch<React.SetStateAction<CountryInterface[]>>) => {
     const response = await axios.get(URL);
-    const fetchedCountries = response.data.slice(0, 4)
+    const fetchedCountries = response.data.slice(0, 8)
 
     const Countries: CountryInterface[] = []
 

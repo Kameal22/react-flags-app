@@ -31,4 +31,8 @@ export const CountryStyled = styled.div`
     flex-direction: column;
     justify-content: space-around;
   }
+
+  &:hover {
+    cursor: pointer;
+  }
 `;

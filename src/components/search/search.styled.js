@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const SearchStyled = styled.div`
-  width: 25%;
+  width: 22%;
 `;
 
 export const FormStyled = styled.form`
@@ -10,7 +10,7 @@ export const FormStyled = styled.form`
   i {
     position: absolute;
     left: 10px;
-    top: 12px;
+    top: 10px;
     color: grey;
   }
 `;

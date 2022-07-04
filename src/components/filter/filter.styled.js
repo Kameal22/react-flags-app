@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const FilterStyledDiv = styled.div`
-  width: 20%;
+  width: 16%;
   position: relative;
 `;
 

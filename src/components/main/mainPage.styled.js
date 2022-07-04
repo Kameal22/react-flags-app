@@ -11,8 +11,15 @@ export const MainPageStyled = styled.div`
   padding-right: 5%;
 `;
 
-export const MainPageSearch = styled.div`
+export const MainPageSearchStyled = styled.div`
   display: flex;
   align-items: center;
+  justify-content: space-between;
+`;
+
+export const MainPageCountriesStyled = styled.div`
+  margin-top: 6vh;
+  width: 100%;
+  display: flex;
   justify-content: space-between;
 `;

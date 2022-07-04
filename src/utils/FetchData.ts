@@ -8,7 +8,7 @@ export const fetchData = async (URL: string, setCountries: React.Dispatch<React.
     const Countries: CountryInterface[] = []
 
     fetchedCountries.forEach((country: any) => {
-        const singleCountry: CountryInterface = {flag: country.flags.png, name: country.name, population: country.population, region: country.region, capital: country.capital}
+        const singleCountry: CountryInterface = {flag: country.flags.png, name: country.name.common, population: country.population, region: country.region, capital: country.capital}
 
         Countries.push(singleCountry)
     })

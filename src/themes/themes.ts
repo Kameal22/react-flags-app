@@ -1,7 +1,7 @@
 export const lightTheme = {
     background: {
       nav: 'white',
-      container: '#d8dbe2'
+      container: '#f7f0f5'
     },
     textColor: {
       nav: 'black',

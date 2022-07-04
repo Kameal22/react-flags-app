@@ -20,7 +20,7 @@ const MainPage: React.FC = () => {
   return (
     <MainPageStyled>
       <MainPageSearchStyled>
-        <Search />
+        <Search countries={countries} />
         <Filter />
       </MainPageSearchStyled>
       <MainPageCountriesStyled>

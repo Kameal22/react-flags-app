@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const CountryStyled = styled.div`
-  width: 22%;
+  width: 22.5%;
   height: 550px;
   background-color: ${({ theme }) => theme.background.country};
   -webkit-box-shadow: -3px 5px 12px -6px rgba(66, 68, 90, 1);
@@ -30,6 +30,10 @@ export const CountryStyled = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: space-around;
+  }
+
+  p {
+    font-size: 0.9em;
   }
 
   &:hover {

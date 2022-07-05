@@ -21,7 +21,7 @@ function App() {
         <Nav toggleDarkMode={changeTheme} theme={theme} />
         <Routes>
           <Route path="/" element={<MainPage />} />
-          <Route path="/details/:countryId" element={<DetailsPage />} />
+          <Route path="/details/:countryName" element={<DetailsPage />} />
         </Routes>
       </BrowserRouter>
     </ThemeProvider>

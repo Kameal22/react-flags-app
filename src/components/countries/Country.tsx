@@ -1,5 +1,6 @@
 import { CountryStyled } from "./country.styled";
 import { CountryInterface } from "../../interfaces/CountriesInterface";
+import { Link } from "react-router-dom";
 
 const Country: React.FC<CountryInterface> = ({
   flag,
@@ -12,7 +13,12 @@ const Country: React.FC<CountryInterface> = ({
     <CountryStyled>
       <img alt="Flag" src={flag} />
       <div>
-        <h3>{name}</h3>
+        <Link
+          style={{ textDecoration: "none", color: "inherit" }}
+          to={`/details/${name}`}
+        >
+          <h3>{name}</h3>
+        </Link>
         <p>
           <span>Population:</span> {population}
         </p>

@@ -15,4 +15,8 @@ export const SelectStyled = styled.select`
   &:hover {
     cursor: pointer;
   }
+
+  &:focus {
+    outline: none;
+  }
 `;

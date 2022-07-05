@@ -1,3 +1,3 @@
 export const regions = [
-    'Africa', 'America', 'Asia', 'Europe', 'Oceania'
+    'Africa', 'Americas', 'Asia', 'Europe', 'Oceania'
 ]

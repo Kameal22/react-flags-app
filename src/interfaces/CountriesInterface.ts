@@ -1,8 +1,17 @@
+type SingleCurrency = {
+    name: string;
+    symbol: string;
+} 
+   
+type Currencies = {
+    [key: string]: SingleCurrency;
+} 
+
 export interface CountryDetails{
     nativeName: any,
     subRegion: string,
     status: string,
-    currencies: any,
+    currencies: Currencies,
     languages: any
 }
 

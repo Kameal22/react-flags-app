@@ -10,8 +10,8 @@ const DetailsPage: React.FC = () => {
 
   const shownCountry = countries.find(country => country.name === countryName);
 
-  // console.log(shownCountry?.details.currencies)
-  console.log(shownCountry?.details.languages)
+  console.log(shownCountry?.details.currencies)
+  // console.log(shownCountry?.details.languages)
 
   return <DetailsStyledDiv>
     <DetailsHeadingDiv>
@@ -25,7 +25,7 @@ const DetailsPage: React.FC = () => {
       <Details>
         <h1>{shownCountry?.name}</h1>
         <Statistics>
-          <p>Native name: {shownCountry?.details.nativeName.common}</p>
+          {/* <p>Native name: {shownCountry?.details.nativeName.common}</p> */}
           <p>Population: {shownCountry?.population}</p>
           <p>Region: {shownCountry?.region}</p>
           <p>Sub region: {shownCountry?.details.subRegion}</p>

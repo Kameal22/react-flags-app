@@ -5,6 +5,8 @@ export const fetchData = async (URL: string, setCountries: (countries: CountryIn
     const response = await axios.get(URL);
     const fetchedCountries = response.data.slice(0, 8)
 
+    console.log(fetchedCountries)
+
     const Countries: CountryInterface[] = []
 
     fetchedCountries.forEach((country: any) => {

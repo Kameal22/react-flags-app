@@ -10,17 +10,31 @@ import { useEffect, useMemo, useState } from "react";
 import { ALL_FLAGS_API_URL } from "../../constants/API_URL";
 import { CountryInterface } from "../../interfaces/CountriesInterface";
 import Country from "../countries/Country";
+import { fetchCountries } from "../../redux/slices/CountriesSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "../../redux/Store";
 
 const MainPage: React.FC = () => {
-  const [countries, setCountries] = useState<CountryInterface[]>([]);
   const [searchValue, setSearchValue] = useState("");
   const [filterValue, setFilterValue] = useState("");
+
+  //Fetch more details for details component
+
+  const dispatch = useDispatch();
+
+  const getCountries = (countries: CountryInterface[]) => {
+    dispatch(
+      fetchCountries({ countries })
+    )
+  }
+
+  const countries = useSelector((state: RootState) => state.countries.countries)
 
   // Add loading while fetching data
   // Add FILTERVALUE reseting by a button which will be visible when filterValue isnt empty.
 
   useEffect(() => {
-    fetchData(ALL_FLAGS_API_URL, setCountries);
+    fetchData(ALL_FLAGS_API_URL, getCountries);
   }, []);
 
   const changeSearchValue = (value: string) => {
@@ -63,6 +77,7 @@ const MainPage: React.FC = () => {
                 region={country.region}
                 population={country.population}
                 capital={country.capital}
+                details={country.details}
               />
             );
           } else if (!filterValue) {
@@ -74,6 +89,7 @@ const MainPage: React.FC = () => {
                 region={country.region}
                 population={country.population}
                 capital={country.capital}
+                details={country.details}
               />
             );
           }

@@ -15,7 +15,7 @@ const Country: React.FC<CountryInterface> = ({
       <div>
         <Link
           style={{ textDecoration: "none", color: "inherit" }}
-          to={`/details/${name}`}
+          to={`/${name}`}
         >
           <h3>{name}</h3>
         </Link>

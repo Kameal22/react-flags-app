@@ -3,5 +3,5 @@ export interface CountryInterface{
     name: string,
     population: number,
     region: string,
-    capital: string
+    capital: string,
 }

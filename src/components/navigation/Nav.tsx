@@ -11,7 +11,7 @@ const Nav: React.FC<Props> = ({ toggleDarkMode, theme }) => {
   return (
     <NavStyled>
       <Link
-        style={{ textDecoration: "none", color: "inherit", width: "15%", marginLeft: '2%' }}
+        style={{ textDecoration: "none", color: "inherit", width: "30%", marginLeft: '2%' }}
         to="/"
       >
         <h1>Where in the world?</h1>

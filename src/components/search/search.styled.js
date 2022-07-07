@@ -2,6 +2,14 @@ import styled from "styled-components";
 
 export const SearchStyled = styled.div`
   width: 22%;
+
+  @media screen and (max-width: 800px) {
+    width: 35%;
+  }
+
+  @media screen and (max-width: 700px) {
+    width: 50%;
+  }
 `;
 
 export const FormStyled = styled.form`

@@ -40,6 +40,10 @@ export const CountryStyled = styled.div`
     cursor: pointer;
   }
 
+  @media screen and (max-width: 1550px) {
+    width: 26%;
+  }
+
   @media screen and (max-width: 1460px) {
     width: 30%;
   }

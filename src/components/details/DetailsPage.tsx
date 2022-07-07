@@ -10,6 +10,7 @@ import {
 } from "./detailsPage.styled";
 import { useSelector } from "react-redux";
 import { RootState } from "../../redux/Store";
+import { Link } from "react-router-dom";
 
 const DetailsPage: React.FC = () => {
   const { countryName } = useParams();
@@ -23,13 +24,19 @@ const DetailsPage: React.FC = () => {
   );
 
   const currencies = shownCountry?.details.currencies;
+  const languages = shownCountry?.details.languages;
 
   return (
     <DetailsStyledDiv>
       <DetailsHeadingDiv>
-        <button>
-          Back <i className="bi bi-arrow-left"></i>
-        </button>
+        <Link
+          style={{ textDecoration: "none", color: "inherit", width: "15%", marginLeft: '2%' }}
+          to="/"
+        >
+          <button>
+            Back <i className="bi bi-arrow-left"></i>
+          </button>
+        </Link>
       </DetailsHeadingDiv>
       <CountryDetailsDiv>
         <Flag>
@@ -65,7 +72,7 @@ const DetailsPage: React.FC = () => {
                   </li>
                   {Object.values(currencies).map((currency) => {
                     return (
-                      <li style={{ marginLeft: "1em" }}>{currency.name}</li>
+                      <li style={{ marginLeft: ".3em" }}>{currency.name}</li>
                     );
                   })}
                 </div>
@@ -75,7 +82,22 @@ const DetailsPage: React.FC = () => {
                 </li>
               )}
               <li>
-                <span>LANGUAGES</span>
+                {languages ? (
+                  <div>
+                    <li>
+                      <span>Languages:</span>
+                    </li>
+                    {Object.values(languages).map((lang: any) => {
+                      return (
+                        <li style={{ marginLeft: ".3em" }}>{lang}</li>
+                      );
+                    })}
+                  </div>
+                ) : (
+                  <li>
+                    <span>No data provided</span>
+                  </li>
+                )}
               </li>
             </ul>
           </Statistics>

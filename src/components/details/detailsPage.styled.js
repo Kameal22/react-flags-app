@@ -41,13 +41,14 @@ export const DetailsHeadingDiv = styled.div`
 `;
 
 export const CountryDetailsDiv = styled.div`
-  width: 80%;
+  width: 85%;
   height: 450px;
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   display: flex;
+  background-color: ${({ theme }) => theme.background.details};
 `;
 
 export const Flag = styled.div`
@@ -72,7 +73,7 @@ export const Details = styled.div`
 `;
 
 export const Statistics = styled.ul`
-  width: 80%;
+  width: 100%;
   margin-left: auto;
   margin-right: auto;
   display: flex;
@@ -81,12 +82,21 @@ export const Statistics = styled.ul`
   ul {
     div {
       display: flex;
+
+      li {
+        margin: 0;
+        margin-top: 2vh;
+      }
+
+      &:last-child {
+        margin-top: -2vh;
+      }
     }
   }
 
   li {
     list-style: none;
-    margin-top: 1vh;
+    margin-top: 2vh;
     font-size: 0.95em;
   }
 

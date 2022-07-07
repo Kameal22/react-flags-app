@@ -18,17 +18,15 @@ const MainPage: React.FC = () => {
   const [searchValue, setSearchValue] = useState("");
   const [filterValue, setFilterValue] = useState("");
 
-  //Fetch more details for details component
-
   const dispatch = useDispatch();
 
   const getCountries = (countries: CountryInterface[]) => {
-    dispatch(
-      fetchCountries({ countries })
-    )
-  }
+    dispatch(fetchCountries({ countries }));
+  };
 
-  const countries = useSelector((state: RootState) => state.countries.countries)
+  const countries = useSelector(
+    (state: RootState) => state.countries.countries
+  );
 
   // Add loading while fetching data
   // Add FILTERVALUE reseting by a button which will be visible when filterValue isnt empty.

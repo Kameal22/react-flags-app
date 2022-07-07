@@ -1,42 +1,64 @@
 import { useParams } from "react-router-dom";
-import { DetailsStyledDiv, CountryDetailsDiv, DetailsHeadingDiv, Flag, Details, Statistics, BorderCountries } from "./detailsPage.styled";
+import {
+  DetailsStyledDiv,
+  CountryDetailsDiv,
+  DetailsHeadingDiv,
+  Flag,
+  Details,
+  Statistics,
+  BorderCountries,
+} from "./detailsPage.styled";
 import { useSelector } from "react-redux";
 import { RootState } from "../../redux/Store";
 
 const DetailsPage: React.FC = () => {
   const { countryName } = useParams();
 
-  const countries = useSelector((state: RootState) => state.countries.countries);
+  const countries = useSelector(
+    (state: RootState) => state.countries.countries
+  );
 
-  const shownCountry = countries.find(country => country.name === countryName);
+  const shownCountry = countries.find(
+    (country) => country.name === countryName
+  );
 
-  console.log(shownCountry?.details.currencies)
-  // console.log(shownCountry?.details.languages)
+  const currencies = shownCountry?.details.currencies;
 
-  return <DetailsStyledDiv>
-    <DetailsHeadingDiv>
-      <button>Back</button>
-      <i className="bi bi-arrow-left"></i>
-    </DetailsHeadingDiv>
-    <CountryDetailsDiv>
+  return (
+    <DetailsStyledDiv>
+      <DetailsHeadingDiv>
+        <button>Back</button>
+        <i className="bi bi-arrow-left"></i>
+      </DetailsHeadingDiv>
+      <CountryDetailsDiv>
+        <Flag>
+          <img src={shownCountry?.flag}></img>
+        </Flag>
 
-      <Flag><img src={shownCountry?.flag}></img></Flag>
-
-      <Details>
-        <h1>{shownCountry?.name}</h1>
-        <Statistics>
-          {/* <p>Native name: {shownCountry?.details.nativeName.common}</p> */}
-          <p>Population: {shownCountry?.population}</p>
-          <p>Region: {shownCountry?.region}</p>
-          <p>Sub region: {shownCountry?.details.subRegion}</p>
-          <p>Capital: {shownCountry?.capital}</p>
-          <p>Status: {shownCountry?.details.status}</p>
-        </Statistics>
-        <BorderCountries></BorderCountries>
-      </Details>
-
-    </CountryDetailsDiv>
-  </DetailsStyledDiv>;
+        <Details>
+          <h1>{shownCountry?.name}</h1>
+          <Statistics>
+            <li>Population: {shownCountry?.population}</li>
+            <li>Region: {shownCountry?.region}</li>
+            <li>Sub region: {shownCountry?.details.subRegion}</li>
+            <li>Capital: {shownCountry?.capital}</li>
+            <li>Status: {shownCountry?.details.status}</li>
+            {currencies ? (
+              <li>
+                Currencies:{" "}
+                {Object.values(currencies).map((currency) => {
+                  return <li>{currency.name}</li>;
+                })}
+              </li>
+            ) : (
+              <li>No data provided</li>
+            )}
+          </Statistics>
+          <BorderCountries></BorderCountries>
+        </Details>
+      </CountryDetailsDiv>
+    </DetailsStyledDiv>
+  );
 };
 
 export default DetailsPage;

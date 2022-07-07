@@ -73,6 +73,13 @@ export const Details = styled.div`
 
 export const Statistics = styled.ul`
   border: 2px solid magenta;
+  width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+
+  li {
+    list-style: none;
+  }
 `;
 
 export const BorderCountries = styled.ul`

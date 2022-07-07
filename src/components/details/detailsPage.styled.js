@@ -25,6 +25,7 @@ export const DetailsHeadingDiv = styled.div`
     -webkit-box-shadow: -3px 5px 12px -6px rgba(66, 68, 90, 1);
     -moz-box-shadow: -3px 5px 12px -6px rgba(66, 68, 90, 1);
     box-shadow: -3px 5px 12px -6px rgba(66, 68, 90, 1);
+    position: relative;
 
     &:hover {
       cursor: pointer;
@@ -33,13 +34,13 @@ export const DetailsHeadingDiv = styled.div`
 
   i {
     position: absolute;
-    left: 12px;
-    top: 48px;
+    top: 50%;
+    left: 20%;
+    transform: translate(-50%, -50%);
   }
 `;
 
 export const CountryDetailsDiv = styled.div`
-  border: 2px solid ivory;
   width: 80%;
   height: 450px;
   position: absolute;
@@ -64,7 +65,6 @@ export const Flag = styled.div`
 
 export const Details = styled.div`
   width: 55%;
-  border: 4px solid green;
   padding: 5%;
   display: flex;
   flex-direction: column;
@@ -72,16 +72,16 @@ export const Details = styled.div`
 `;
 
 export const Statistics = styled.ul`
-  border: 2px solid magenta;
   width: 80%;
   margin-left: auto;
   margin-right: auto;
+  display: flex;
+  justify-content: space-between;
 
   li {
     list-style: none;
+    margin-top: 1vh;
   }
 `;
 
-export const BorderCountries = styled.ul`
-  border: 2px solid teal;
-`;
+export const BorderCountries = styled.ul``;

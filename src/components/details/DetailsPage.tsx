@@ -27,8 +27,9 @@ const DetailsPage: React.FC = () => {
   return (
     <DetailsStyledDiv>
       <DetailsHeadingDiv>
-        <button>Back</button>
-        <i className="bi bi-arrow-left"></i>
+        <button>
+          Back <i className="bi bi-arrow-left"></i>
+        </button>
       </DetailsHeadingDiv>
       <CountryDetailsDiv>
         <Flag>
@@ -38,21 +39,27 @@ const DetailsPage: React.FC = () => {
         <Details>
           <h1>{shownCountry?.name}</h1>
           <Statistics>
-            <li>Population: {shownCountry?.population}</li>
-            <li>Region: {shownCountry?.region}</li>
-            <li>Sub region: {shownCountry?.details.subRegion}</li>
-            <li>Capital: {shownCountry?.capital}</li>
-            <li>Status: {shownCountry?.details.status}</li>
-            {currencies ? (
-              <li>
-                Currencies:{" "}
-                {Object.values(currencies).map((currency) => {
-                  return <li>{currency.name}</li>;
-                })}
-              </li>
-            ) : (
-              <li>No data provided</li>
-            )}
+            <ul>
+              <li>Population: {shownCountry?.population}</li>
+              <li>Region: {shownCountry?.region}</li>
+              <li>Sub region: {shownCountry?.details.subRegion}</li>
+              <li>Capital: {shownCountry?.capital}</li>
+            </ul>
+
+            <ul>
+              <li>Status: {shownCountry?.details.status}</li>
+              {currencies ? (
+                <li>
+                  Currencies:{" "}
+                  {Object.values(currencies).map((currency) => {
+                    return <li>{currency.name}</li>;
+                  })}
+                </li>
+              ) : (
+                <li>No data provided</li>
+              )}
+              <li>LANGUAGES</li>
+            </ul>
           </Statistics>
           <BorderCountries></BorderCountries>
         </Details>

@@ -78,9 +78,20 @@ export const Statistics = styled.ul`
   display: flex;
   justify-content: space-between;
 
+  ul {
+    div {
+      display: flex;
+    }
+  }
+
   li {
     list-style: none;
     margin-top: 1vh;
+    font-size: 0.95em;
+  }
+
+  span {
+    font-weight: bold;
   }
 `;
 

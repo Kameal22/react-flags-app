@@ -40,25 +40,43 @@ const DetailsPage: React.FC = () => {
           <h1>{shownCountry?.name}</h1>
           <Statistics>
             <ul>
-              <li>Population: {shownCountry?.population}</li>
-              <li>Region: {shownCountry?.region}</li>
-              <li>Sub region: {shownCountry?.details.subRegion}</li>
-              <li>Capital: {shownCountry?.capital}</li>
+              <li>
+                <span>Population:</span> {shownCountry?.population}
+              </li>
+              <li>
+                <span>Region:</span> {shownCountry?.region}
+              </li>
+              <li>
+                <span>Sub region:</span> {shownCountry?.details.subRegion}
+              </li>
+              <li>
+                <span>Capital:</span> {shownCountry?.capital}
+              </li>
             </ul>
 
             <ul>
-              <li>Status: {shownCountry?.details.status}</li>
+              <li>
+                <span>Status:</span> {shownCountry?.details.status}
+              </li>
               {currencies ? (
-                <li>
-                  Currencies:{" "}
+                <div>
+                  <li>
+                    <span>Currencies:</span>
+                  </li>
                   {Object.values(currencies).map((currency) => {
-                    return <li>{currency.name}</li>;
+                    return (
+                      <li style={{ marginLeft: "1em" }}>{currency.name}</li>
+                    );
                   })}
-                </li>
+                </div>
               ) : (
-                <li>No data provided</li>
+                <li>
+                  <span>No data provided</span>
+                </li>
               )}
-              <li>LANGUAGES</li>
+              <li>
+                <span>LANGUAGES</span>
+              </li>
             </ul>
           </Statistics>
           <BorderCountries></BorderCountries>

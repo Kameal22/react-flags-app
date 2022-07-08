@@ -7,17 +7,8 @@ type Currencies = {
     [key: string]: SingleCurrency;
 } 
 
-type SingleNativeName = {
-    official: string;
-    common: string;
-}
-
-type NativeNames = {
-    [key: string]: SingleNativeName;
-}
 
 export interface CountryDetails{
-    nativeName: NativeNames,
     subRegion: string,
     status: string,
     currencies: Currencies,

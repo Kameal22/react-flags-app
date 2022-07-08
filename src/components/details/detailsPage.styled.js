@@ -73,7 +73,7 @@ export const Details = styled.div`
 `;
 
 export const Statistics = styled.ul`
-  width: 100%;
+  width: 90%;
   margin-left: auto;
   margin-right: auto;
   display: flex;
@@ -86,10 +86,6 @@ export const Statistics = styled.ul`
       li {
         margin: 0;
         margin-top: 2vh;
-      }
-
-      &:last-child {
-        margin-top: -2vh;
       }
     }
   }

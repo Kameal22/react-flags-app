@@ -30,7 +30,12 @@ const DetailsPage: React.FC = () => {
     <DetailsStyledDiv>
       <DetailsHeadingDiv>
         <Link
-          style={{ textDecoration: "none", color: "inherit", width: "15%", marginLeft: '2%' }}
+          style={{
+            textDecoration: "none",
+            color: "inherit",
+            width: "15%",
+            marginLeft: "2%",
+          }}
           to="/"
         >
           <button>
@@ -65,6 +70,7 @@ const DetailsPage: React.FC = () => {
               <li>
                 <span>Status:</span> {shownCountry?.details.status}
               </li>
+
               {currencies ? (
                 <div>
                   <li>
@@ -81,24 +87,21 @@ const DetailsPage: React.FC = () => {
                   <span>No data provided</span>
                 </li>
               )}
-              <li>
-                {languages ? (
-                  <div>
-                    <li>
-                      <span>Languages:</span>
-                    </li>
-                    {Object.values(languages).map((lang: any) => {
-                      return (
-                        <li style={{ marginLeft: ".3em" }}>{lang}</li>
-                      );
-                    })}
-                  </div>
-                ) : (
+
+              {languages ? (
+                <div>
                   <li>
-                    <span>No data provided</span>
+                    <span>Languages:</span>
                   </li>
-                )}
-              </li>
+                  {Object.values(languages).map((lang: any) => {
+                    return <li style={{ marginLeft: ".3em" }}>{lang}</li>;
+                  })}
+                </div>
+              ) : (
+                <li>
+                  <span>No data provided</span>
+                </li>
+              )}
             </ul>
           </Statistics>
           <BorderCountries></BorderCountries>

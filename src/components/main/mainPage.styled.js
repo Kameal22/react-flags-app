@@ -29,10 +29,11 @@ export const MainPageCountriesStyled = styled.div`
   margin-top: 6vh;
   width: 100%;
   display: flex;
+  justify-content: space-between;
   flex-wrap: wrap;
   gap: 6vh;
+`;
 
-  div {
-    margin-left: 4%;
-  }
+export const PlaceholderDiv = styled.div`
+  width: 22%;
 `;

@@ -7,12 +7,15 @@ type Currencies = {
     [key: string]: SingleCurrency;
 } 
 
+type Language = {
+    name: string;
+}
 
 export interface CountryDetails{
     subRegion: string,
     status: string,
     currencies: Currencies,
-    languages: any
+    languages: Language
 }
 
 export interface CountryInterface{

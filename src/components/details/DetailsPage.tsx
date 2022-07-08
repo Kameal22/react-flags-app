@@ -78,7 +78,9 @@ const DetailsPage: React.FC = () => {
                   </li>
                   {Object.values(currencies).map((currency) => {
                     return (
-                      <li style={{ marginLeft: ".3em" }}>{currency.name}</li>
+                      <li key={currency.name} style={{ marginLeft: ".3em" }}>
+                        {currency.name}
+                      </li>
                     );
                   })}
                 </div>
@@ -93,8 +95,12 @@ const DetailsPage: React.FC = () => {
                   <li>
                     <span>Languages:</span>
                   </li>
-                  {Object.values(languages).map((lang: any) => {
-                    return <li style={{ marginLeft: ".3em" }}>{lang}</li>;
+                  {Object.values(languages).map((lang) => {
+                    return (
+                      <li key={lang} style={{ marginLeft: ".3em" }}>
+                        {lang}
+                      </li>
+                    );
                   })}
                 </div>
               ) : (

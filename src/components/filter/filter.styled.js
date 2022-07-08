@@ -28,3 +28,20 @@ export const SelectStyled = styled.select`
     outline: none;
   }
 `;
+
+export const ResetFiltersStyled = styled.button`
+  width: 50%;
+  padding: 4px;
+  margin-top: 1vh;
+  border-radius: 4px;
+  background-color: #333533;
+  border: none;
+  color: white;
+  -webkit-box-shadow: -3px 5px 12px -6px rgba(66, 68, 90, 1);
+  -moz-box-shadow: -3px 5px 12px -6px rgba(66, 68, 90, 1);
+  box-shadow: -3px 5px 12px -6px rgba(66, 68, 90, 1);
+
+  &:hover {
+    cursor: pointer;
+  }
+`;

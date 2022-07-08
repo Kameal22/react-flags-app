@@ -4,6 +4,7 @@ import {
   MainPageStyled,
   MainPageSearchStyled,
   MainPageCountriesStyled,
+  LoadingInfoStyled,
 } from "./mainPage.styled";
 import { fetchData } from "../../utils/FetchData";
 import { useEffect, useMemo, useState } from "react";
@@ -15,6 +16,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../redux/Store";
 
 const MainPage: React.FC = () => {
+  const [loading, setLoading] = useState(true);
   const [searchValue, setSearchValue] = useState("");
   const [filterValue, setFilterValue] = useState("");
 
@@ -28,11 +30,8 @@ const MainPage: React.FC = () => {
     (state: RootState) => state.countries.countries
   );
 
-  // Add loading while fetching data
-  // Add FILTERVALUE reseting by a button which will be visible when filterValue isnt empty.
-
   useEffect(() => {
-    fetchData(ALL_FLAGS_API_URL, getCountries);
+    fetchData(ALL_FLAGS_API_URL, getCountries, setLoading);
   }, []);
 
   const changeSearchValue = (value: string) => {
@@ -58,43 +57,47 @@ const MainPage: React.FC = () => {
     countries,
   ]);
 
-  return (
-    <MainPageStyled>
-      <MainPageSearchStyled>
-        <Search value={searchValue} changeValue={changeSearchValue} />
-        <Filter changeValue={changeFilterValue} />
-      </MainPageSearchStyled>
-      <MainPageCountriesStyled>
-        {filteredCountries.map((country) => {
-          if (country.region === filterValue) {
-            return (
-              <Country
-                key={country.name}
-                flag={country.flag}
-                name={country.name}
-                region={country.region}
-                population={country.population}
-                capital={country.capital}
-                details={country.details}
-              />
-            );
-          } else if (!filterValue) {
-            return (
-              <Country
-                key={country.name}
-                flag={country.flag}
-                name={country.name}
-                region={country.region}
-                population={country.population}
-                capital={country.capital}
-                details={country.details}
-              />
-            );
-          }
-        })}
-      </MainPageCountriesStyled>
-    </MainPageStyled>
-  );
+  if (loading) {
+    return <LoadingInfoStyled>Loading data...</LoadingInfoStyled>
+  } else {
+    return (
+      <MainPageStyled>
+        <MainPageSearchStyled>
+          <Search value={searchValue} changeValue={changeSearchValue} />
+          <Filter value={filterValue} changeValue={changeFilterValue} />
+        </MainPageSearchStyled>
+        <MainPageCountriesStyled>
+          {filteredCountries.map((country) => {
+            if (country.region === filterValue) {
+              return (
+                <Country
+                  key={country.name}
+                  flag={country.flag}
+                  name={country.name}
+                  region={country.region}
+                  population={country.population}
+                  capital={country.capital}
+                  details={country.details}
+                />
+              );
+            } else if (!filterValue) {
+              return (
+                <Country
+                  key={country.name}
+                  flag={country.flag}
+                  name={country.name}
+                  region={country.region}
+                  population={country.population}
+                  capital={country.capital}
+                  details={country.details}
+                />
+              );
+            }
+          })}
+        </MainPageCountriesStyled>
+      </MainPageStyled>
+    );
+  }
 };
 
 export default MainPage;

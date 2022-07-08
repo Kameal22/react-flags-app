@@ -24,5 +24,5 @@ export interface CountryInterface{
     population: number,
     region: string,
     capital: string,
-    details: CountryDetails
+    details: CountryDetails,
 }

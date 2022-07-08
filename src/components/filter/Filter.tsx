@@ -1,11 +1,12 @@
-import { FilterStyledDiv, SelectStyled } from "./filter.styled";
+import { FilterStyledDiv, ResetFiltersStyled, SelectStyled } from "./filter.styled";
 import { regions } from "../../constants/Regions";
 
 interface Props {
+  value: string,
   changeValue: (value: string) => void;
 }
 
-const Filter: React.FC<Props> = ({ changeValue }) => {
+const Filter: React.FC<Props> = ({ changeValue, value }) => {
   const handleChange = (e: React.FormEvent<HTMLSelectElement>) => {
     let selectedValue = e.currentTarget.value;
     changeValue(selectedValue);
@@ -23,6 +24,7 @@ const Filter: React.FC<Props> = ({ changeValue }) => {
           </option>
         ))}
       </SelectStyled>
+      {value ? <ResetFiltersStyled onClick={() => changeValue("")}>Reset filters</ResetFiltersStyled> : null}
     </FilterStyledDiv>
   );
 };

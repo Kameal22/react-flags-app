@@ -36,7 +36,7 @@ const MainPage: React.FC = () => {
 
   const searchCountries = () => {
     return countries
-      .filter((country) => country.name.toLowerCase().includes(searchValue))
+      .filter((country) => country.name.toLowerCase().includes(searchValue)) // Make this a method.
       .filter((country) => country.region.toLowerCase().includes(chosenRegion));
   };
 

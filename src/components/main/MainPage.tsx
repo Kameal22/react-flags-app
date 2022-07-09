@@ -40,7 +40,7 @@ const MainPage: React.FC = () => {
   };
 
   const filteredCountries = useMemo(searchCountries, [
-    //useMemo ensures that the filteredList variable is recalculated only when either value of selectedCategory or countries changes.
+    //useMemo ensures that the countries variable is recalculated only when either value of selectedCategory/region or countries changes.
     countryName,
     chosenRegion,
     countries,

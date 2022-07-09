@@ -11,9 +11,12 @@ import {
 import { useSelector } from "react-redux";
 import { RootState } from "../../redux/Store";
 import { Link } from "react-router-dom";
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 const DetailsPage: React.FC = () => {
   const { countryName } = useParams();
+  const navigate = useNavigate();
 
   const countries = useSelector(
     (state: RootState) => state.countries.countries
@@ -25,6 +28,14 @@ const DetailsPage: React.FC = () => {
 
   const currencies = shownCountry?.details.currencies;
   const languages = shownCountry?.details.languages;
+
+  console.log(shownCountry)
+
+  useEffect(() => {
+    if (!shownCountry) {
+      navigate(`/`, { replace: true });
+    }
+  }, [shownCountry])
 
   return (
     <DetailsStyledDiv>

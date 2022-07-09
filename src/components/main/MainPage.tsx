@@ -14,7 +14,6 @@ import Country from "../countries/Country";
 import { fetchCountries } from "../../redux/slices/CountriesSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../redux/Store";
-import { filterData } from "../../methods/FilterData";
 
 const MainPage: React.FC = () => {
   const [loading, setLoading] = useState(true);
@@ -37,7 +36,7 @@ const MainPage: React.FC = () => {
 
   const searchCountries = () => {
     return countries
-      .filter((country) => country.name.toLowerCase().includes(countryName) && country.region.toLowerCase().includes(chosenRegion))
+      .filter((country) => country.name.includes(countryName) && country.region.includes(chosenRegion))
   };
 
   const filteredCountries = useMemo(searchCountries, [

@@ -4,6 +4,7 @@ import {
   SelectStyled,
 } from "./filter.styled";
 import { regions } from "../../constants/Regions";
+import { useState } from "react";
 
 interface Props {
   value: string;
@@ -11,16 +12,23 @@ interface Props {
 }
 
 const Filter: React.FC<Props> = ({ changeValue, value }) => {
+  const [formValue, setFormValue] = useState("Filter by Region");
+
   const handleChange = (e: React.FormEvent<HTMLSelectElement>) => {
-    let selectedValue = e.currentTarget.value.toLowerCase();
-    changeValue(selectedValue);
+    setFormValue(e.currentTarget.value);
+    changeValue(e.currentTarget.value);
   };
+
+  const resetForm = () => {
+    setFormValue("FilterByRegion");
+    changeValue("")
+  }
 
   return (
     <FilterStyledDiv>
-      <SelectStyled onChange={handleChange} defaultValue="value">
-        <option value="value" disabled hidden>
-          Filter by Region
+      <SelectStyled onChange={handleChange} value={formValue}>
+        <option value="Filter by Region" disabled hidden>
+          Filter by region
         </option>
         {regions.map((region) => (
           <option key={region} value={region}>
@@ -29,7 +37,7 @@ const Filter: React.FC<Props> = ({ changeValue, value }) => {
         ))}
       </SelectStyled>
       {value ? (
-        <ResetFiltersStyled onClick={() => changeValue("")}>
+        <ResetFiltersStyled onClick={() => resetForm()}>
           Reset filters
         </ResetFiltersStyled>
       ) : null}

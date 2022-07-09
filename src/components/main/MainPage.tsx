@@ -14,10 +14,11 @@ import Country from "../countries/Country";
 import { fetchCountries } from "../../redux/slices/CountriesSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../redux/Store";
+import { filterData } from "../../methods/FilterData";
 
 const MainPage: React.FC = () => {
   const [loading, setLoading] = useState(true);
-  const [searchValue, setSearchValue] = useState("");
+  const [countryName, searchCountryName] = useState("");
   const [chosenRegion, setChosenRegion] = useState("");
 
   const dispatch = useDispatch();
@@ -36,13 +37,12 @@ const MainPage: React.FC = () => {
 
   const searchCountries = () => {
     return countries
-      .filter((country) => country.name.toLowerCase().includes(searchValue)) // Make this a method.
-      .filter((country) => country.region.toLowerCase().includes(chosenRegion));
+      .filter((country) => country.name.toLowerCase().includes(countryName) && country.region.toLowerCase().includes(chosenRegion))
   };
 
   const filteredCountries = useMemo(searchCountries, [
     //useMemo ensures that the filteredList variable is recalculated only when either value of selectedCategory or countries changes.
-    searchValue,
+    countryName,
     chosenRegion,
     countries,
   ]);
@@ -53,7 +53,7 @@ const MainPage: React.FC = () => {
     return (
       <MainPageStyled>
         <MainPageSearchStyled>
-          <Search value={searchValue} changeValue={setSearchValue} />
+          <Search value={countryName} changeValue={searchCountryName} />
           <Filter value={chosenRegion} changeValue={setChosenRegion} />
         </MainPageSearchStyled>
         <MainPageCountriesStyled>

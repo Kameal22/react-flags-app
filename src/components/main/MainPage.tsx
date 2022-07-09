@@ -18,7 +18,7 @@ import { RootState } from "../../redux/Store";
 const MainPage: React.FC = () => {
   const [loading, setLoading] = useState(true);
   const [searchValue, setSearchValue] = useState("");
-  const [filterValue, setFilterValue] = useState("");
+  const [chosenRegion, setChosenRegion] = useState("");
 
   const dispatch = useDispatch();
 
@@ -34,65 +34,41 @@ const MainPage: React.FC = () => {
     fetchData(ALL_FLAGS_API_URL, getCountries, setLoading);
   }, []);
 
-  const changeSearchValue = (value: string) => {
-    setSearchValue(value);
+  const searchCountries = () => {
+    return countries
+      .filter((country) => country.name.toLowerCase().includes(searchValue))
+      .filter((country) => country.region.toLowerCase().includes(chosenRegion));
   };
 
-  const changeFilterValue = (value: string) => {
-    setFilterValue(value);
-  };
-
-  const filterCountries = () => {
-    if (searchValue) {
-      return countries.filter((country) =>
-        country.name.toLocaleLowerCase().includes(searchValue)
-      );
-    }
-    return countries;
-  };
-
-  const filteredCountries = useMemo(filterCountries, [
-    //useMemo ensures that the filteredList variable is recalculated only when either value of selectedCategory or sportList changes.
+  const filteredCountries = useMemo(searchCountries, [
+    //useMemo ensures that the filteredList variable is recalculated only when either value of selectedCategory or countries changes.
     searchValue,
+    chosenRegion,
     countries,
   ]);
 
   if (loading) {
-    return <LoadingInfoStyled>Loading data...</LoadingInfoStyled>
+    return <LoadingInfoStyled>Loading data...</LoadingInfoStyled>;
   } else {
     return (
       <MainPageStyled>
         <MainPageSearchStyled>
-          <Search value={searchValue} changeValue={changeSearchValue} />
-          <Filter value={filterValue} changeValue={changeFilterValue} />
+          <Search value={searchValue} changeValue={setSearchValue} />
+          <Filter value={chosenRegion} changeValue={setChosenRegion} />
         </MainPageSearchStyled>
         <MainPageCountriesStyled>
           {filteredCountries.map((country) => {
-            if (country.region === filterValue) {
-              return (
-                <Country
-                  key={country.name}
-                  flag={country.flag}
-                  name={country.name}
-                  region={country.region}
-                  population={country.population}
-                  capital={country.capital}
-                  details={country.details}
-                />
-              );
-            } else if (!filterValue) {
-              return (
-                <Country
-                  key={country.name}
-                  flag={country.flag}
-                  name={country.name}
-                  region={country.region}
-                  population={country.population}
-                  capital={country.capital}
-                  details={country.details}
-                />
-              );
-            }
+            return (
+              <Country
+                key={country.name}
+                flag={country.flag}
+                name={country.name}
+                region={country.region}
+                population={country.population}
+                capital={country.capital}
+                details={country.details}
+              />
+            );
           })}
           <div style={{ width: "26%" }}></div>
         </MainPageCountriesStyled>

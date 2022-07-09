@@ -2,13 +2,13 @@ import { SearchStyled, FormStyled, InputStyled } from "./search.styled";
 
 interface Props {
   value: string;
-  changeValue: (value: string) => void;
+  changeValue: React.Dispatch<React.SetStateAction<string>>;
 }
 
 const Search: React.FC<Props> = ({ value, changeValue }) => {
   const handleChange = (e: React.FormEvent<HTMLInputElement>): void => {
-    let searchingValue = e.currentTarget.value;
-    changeValue(searchingValue.toLowerCase());
+    let searchingValue = e.currentTarget.value.toLowerCase();
+    changeValue(searchingValue);
   };
 
   return (

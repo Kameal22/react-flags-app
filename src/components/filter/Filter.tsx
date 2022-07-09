@@ -1,14 +1,18 @@
-import { FilterStyledDiv, ResetFiltersStyled, SelectStyled } from "./filter.styled";
+import {
+  FilterStyledDiv,
+  ResetFiltersStyled,
+  SelectStyled,
+} from "./filter.styled";
 import { regions } from "../../constants/Regions";
 
 interface Props {
-  value: string,
-  changeValue: (value: string) => void;
+  value: string;
+  changeValue: React.Dispatch<React.SetStateAction<string>>;
 }
 
 const Filter: React.FC<Props> = ({ changeValue, value }) => {
   const handleChange = (e: React.FormEvent<HTMLSelectElement>) => {
-    let selectedValue = e.currentTarget.value;
+    let selectedValue = e.currentTarget.value.toLowerCase();
     changeValue(selectedValue);
   };
 
@@ -24,7 +28,11 @@ const Filter: React.FC<Props> = ({ changeValue, value }) => {
           </option>
         ))}
       </SelectStyled>
-      {value ? <ResetFiltersStyled onClick={() => changeValue("")}>Reset filters</ResetFiltersStyled> : null}
+      {value ? (
+        <ResetFiltersStyled onClick={() => changeValue("")}>
+          Reset filters
+        </ResetFiltersStyled>
+      ) : null}
     </FilterStyledDiv>
   );
 };

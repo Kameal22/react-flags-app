@@ -23,17 +23,33 @@ export const MainPageSearchStyled = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
+
+  @media screen and (max-width: 700px) {
+    flex-direction: column;
+  }
 `;
 
 export const MainPageCountriesStyled = styled.div`
   margin-top: 6vh;
   width: 100%;
-  display: flex;
+  display: grid;
+  grid-template-columns: 26% 26% 26%;
   justify-content: space-between;
-  flex-wrap: wrap;
   gap: 6vh;
-`;
 
-export const PlaceholderDiv = styled.div`
-  width: 22%;
+  @media screen and (max-width: 1250px) {
+    grid-template-columns: 40% 40%;
+  }
+
+  @media screen and (max-width: 899px) {
+    grid-template-columns: 60%;
+    justify-content: center;
+    align-items: center;
+  }
+
+  @media screen and (max-width: 750px) {
+    grid-template-columns: 90%;
+    justify-content: center;
+    align-items: center;
+  }
 `;

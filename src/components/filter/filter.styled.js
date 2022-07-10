@@ -9,7 +9,8 @@ export const FilterStyledDiv = styled.div`
   }
 
   @media screen and (max-width: 700px) {
-    width: 40%;
+    width: 60%;
+    margin-top: 2vh;
   }
 `;
 

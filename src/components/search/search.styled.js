@@ -8,7 +8,7 @@ export const SearchStyled = styled.div`
   }
 
   @media screen and (max-width: 700px) {
-    width: 50%;
+    width: 80%;
   }
 `;
 

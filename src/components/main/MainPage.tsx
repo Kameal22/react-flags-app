@@ -69,7 +69,6 @@ const MainPage: React.FC = () => {
               />
             );
           })}
-          <div style={{ width: "26%" }}></div>
         </MainPageCountriesStyled>
       </MainPageStyled>
     );

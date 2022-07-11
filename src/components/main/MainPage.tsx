@@ -35,8 +35,11 @@ const MainPage: React.FC = () => {
   }, []);
 
   const searchCountries = () => {
-    return countries
-      .filter((country) => country.name.includes(countryName) && country.region.includes(chosenRegion))
+    return countries.filter(
+      (country) =>
+        country.name.toLowerCase().includes(countryName.toLowerCase()) &&
+        country.region.toLowerCase().includes(chosenRegion.toLowerCase())
+    );
   };
 
   const filteredCountries = useMemo(searchCountries, [

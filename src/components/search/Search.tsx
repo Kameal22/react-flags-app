@@ -7,7 +7,7 @@ interface Props {
 
 const Search: React.FC<Props> = ({ value, changeValue }) => {
   const handleChange = (e: React.FormEvent<HTMLInputElement>): void => {
-    let searchingValue = e.currentTarget.value.toLowerCase();
+    let searchingValue = e.currentTarget.value;
     changeValue(searchingValue);
   };
 

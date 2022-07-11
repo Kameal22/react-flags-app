@@ -33,9 +33,13 @@ export const MainPageCountriesStyled = styled.div`
   margin-top: 6vh;
   width: 100%;
   display: grid;
-  grid-template-columns: 26% 26% 26%;
+  grid-template-columns: 22% 22% 22% 22%;
   justify-content: space-between;
   gap: 6vh;
+
+  @media screen and (max-width: 1499px) {
+    grid-template-columns: 25% 25% 25%;
+  }
 
   @media screen and (max-width: 1250px) {
     grid-template-columns: 40% 40%;

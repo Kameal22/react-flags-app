@@ -29,8 +29,6 @@ const DetailsPage: React.FC = () => {
   const currencies = shownCountry?.details.currencies;
   const languages = shownCountry?.details.languages;
 
-  console.log(shownCountry)
-
   useEffect(() => {
     if (!shownCountry) {
       navigate(`/`, { replace: true });

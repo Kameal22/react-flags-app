@@ -9,6 +9,7 @@ import {
 import { useEffect, useMemo, useState } from "react";
 import { CountryInterface } from "../../interfaces/CountriesInterface";
 import Country from "../countries/Country";
+import { Waypoint } from "react-waypoint";
 
 interface Props {
   loading: boolean;
@@ -54,7 +55,6 @@ const MainPage: React.FC<Props> = ({ loading, countries }) => {
   } else {
     return (
       <MainPageStyled>
-        <p onClick={fetchMoreCountries}>TEST</p>
         <MainPageSearchStyled>
           <Search value={countryName} changeValue={searchCountryName} />
           <Filter value={chosenRegion} changeValue={setChosenRegion} />
@@ -74,6 +74,9 @@ const MainPage: React.FC<Props> = ({ loading, countries }) => {
             );
           })}
         </MainPageCountriesStyled>
+        <Waypoint onEnter={fetchMoreCountries}>
+          <p style={countriesOnScreen.length === 250 ? { display: "none" } : { textAlign: "center" }} onClick={fetchMoreCountries}>Loading data..</p>
+        </Waypoint>
       </MainPageStyled>
     );
   }

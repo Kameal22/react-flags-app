@@ -21,11 +21,18 @@ const MainPage: React.FC<Props> = ({ loading, countries }) => {
   const [countryName, searchCountryName] = useState("");
   const [chosenRegion, setChosenRegion] = useState("");
 
-  const ammountToFetch = 20;
-
   useEffect(() => {
-    setCountriesOnScreen(countries.slice(0, ammountToFetch)) // Set first 20 countries on page load.
+    setCountriesOnScreen(countries.slice(0, 20)) // Set first 20 countries on page load.
   }, [countries])
+
+  const fetchMoreCountries = () => {
+    // If user reaches the bottom of the page then run this function's logic.
+    const currentLength = countriesOnScreen.length;
+
+    const moreCountries = countries.slice(currentLength, currentLength + 20);
+
+    setCountriesOnScreen(prev => [...prev, ...moreCountries])
+  }
 
   const searchCountries = () => {
     return countriesOnScreen.filter(
@@ -47,6 +54,7 @@ const MainPage: React.FC<Props> = ({ loading, countries }) => {
   } else {
     return (
       <MainPageStyled>
+        <p onClick={fetchMoreCountries}>TEST</p>
         <MainPageSearchStyled>
           <Search value={countryName} changeValue={searchCountryName} />
           <Filter value={chosenRegion} changeValue={setChosenRegion} />

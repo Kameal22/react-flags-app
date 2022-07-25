@@ -51,10 +51,13 @@ const MainPage: React.FC<Props> = ({ loading, countries }) => {
   ]);
 
   if (loading) {
-    return <LoadingInfoStyled>
-      <Box sx={{ display: 'flex' }}>
-        <CircularProgress />
-      </Box></LoadingInfoStyled>;
+    return (
+      <LoadingInfoStyled>
+        <Box sx={{ display: 'flex' }}>
+          <CircularProgress />
+        </Box>
+      </LoadingInfoStyled>
+    )
   } else {
     return (
       <MainPageStyled>

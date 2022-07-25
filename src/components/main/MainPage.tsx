@@ -27,20 +27,20 @@ const MainPage: React.FC<Props> = ({ loading, countries }) => {
   }, [countries])
 
   const fetchMoreCountries = () => {
-    // If user reaches the bottom of the page then run this function's logic.
     const currentLength = countriesOnScreen.length;
-
     const moreCountries = countries.slice(currentLength, currentLength + 20);
+
+    // console.log(moreCountries[moreCountries.length - 1])
 
     setCountriesOnScreen(prev => [...prev, ...moreCountries])
   }
 
   const searchCountries = () => {
-    return countriesOnScreen.filter(
-      (country) =>
-        country.name.toLowerCase().includes(countryName.toLowerCase()) &&
-        country.region.toLowerCase().includes(chosenRegion.toLowerCase())
-    );
+    if (!chosenRegion) {
+      return countriesOnScreen.filter(country => country.name.toLowerCase().includes(countryName.toLowerCase()))
+    } else {
+      return countriesOnScreen.filter(country => country.name.toLowerCase().includes(countryName.toLowerCase()) && country.region.toLowerCase() === chosenRegion.toLowerCase())
+    }
   };
 
   const filteredCountries = useMemo(searchCountries, [
@@ -75,7 +75,7 @@ const MainPage: React.FC<Props> = ({ loading, countries }) => {
           })}
         </MainPageCountriesStyled>
         <Waypoint onEnter={fetchMoreCountries}>
-          <p style={countriesOnScreen.length === 250 ? { display: "none" } : { textAlign: "center" }} onClick={fetchMoreCountries}>Loading data..</p>
+          <p style={countriesOnScreen.length === 250 ? { display: "none" } : { textAlign: "center" }}>Loading data..</p>
         </Waypoint>
       </MainPageStyled>
     );

@@ -10,6 +10,8 @@ import { useEffect, useMemo, useState } from "react";
 import { CountryInterface } from "../../interfaces/CountriesInterface";
 import Country from "../countries/Country";
 import { Waypoint } from "react-waypoint";
+import CircularProgress from '@mui/material/CircularProgress';
+import Box from '@mui/material/Box';
 
 interface Props {
   loading: boolean;
@@ -28,9 +30,7 @@ const MainPage: React.FC<Props> = ({ loading, countries }) => {
 
   const fetchMoreCountries = () => {
     const currentLength = countriesOnScreen.length;
-    const moreCountries = countries.slice(currentLength, currentLength + 20);
-
-    // console.log(moreCountries[moreCountries.length - 1])
+    const moreCountries = countries.slice(currentLength, currentLength + 20)
 
     setCountriesOnScreen(prev => [...prev, ...moreCountries])
   }
@@ -51,7 +51,10 @@ const MainPage: React.FC<Props> = ({ loading, countries }) => {
   ]);
 
   if (loading) {
-    return <LoadingInfoStyled>Loading data...</LoadingInfoStyled>;
+    return <LoadingInfoStyled>
+      <Box sx={{ display: 'flex' }}>
+        <CircularProgress />
+      </Box></LoadingInfoStyled>;
   } else {
     return (
       <MainPageStyled>
@@ -75,7 +78,6 @@ const MainPage: React.FC<Props> = ({ loading, countries }) => {
           })}
         </MainPageCountriesStyled>
         <Waypoint onEnter={fetchMoreCountries}>
-          <p style={countriesOnScreen.length === 250 ? { display: "none" } : { textAlign: "center" }}>Loading data..</p>
         </Waypoint>
       </MainPageStyled>
     );

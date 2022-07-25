@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const LoadingInfoStyled = styled.h1`
+export const LoadingInfoStyled = styled.div`
   position: absolute;
   top: 50%;
   left: 50%;

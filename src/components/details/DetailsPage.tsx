@@ -7,8 +7,6 @@ import {
   Details,
   Statistics,
 } from "./detailsPage.styled";
-import { useSelector } from "react-redux";
-import { RootState } from "../../redux/Store";
 import { Link } from "react-router-dom";
 import CircularProgress from '@mui/material/CircularProgress';
 import Box from '@mui/material/Box';
@@ -16,20 +14,22 @@ import {
   LoadingInfoStyled,
 } from "../main/mainPage.styled";
 import { noDataProvided } from "./helpers";
+import { useEffect, useState } from "react";
+import { CountryInterface } from "../../interfaces/CountriesInterface";
+import { fetchSingleCountry } from "../../utils/FetchSingleCountry";
+import { SINGLE_FLAG_URL } from "../../constants/API_URL";
 
 const DetailsPage: React.FC = () => {
+  const [country, setCountry] = useState<CountryInterface>();
+
   const { countryName } = useParams();
 
-  const countries = useSelector(
-    (state: RootState) => state.countries.countries
-  );
+  useEffect(() => {
+    fetchSingleCountry(`${SINGLE_FLAG_URL}/${countryName}`, setCountry)
+  }, [])
 
-  const shownCountry = countries.find(
-    (country) => country.name === countryName
-  );
-
-  const currencies = shownCountry?.details.currencies;
-  const languages = shownCountry?.details.languages;
+  const currencies = country?.details.currencies;
+  const languages = country?.details.languages;
 
   return (
     <DetailsStyledDiv>
@@ -48,37 +48,37 @@ const DetailsPage: React.FC = () => {
           </button>
         </Link>
       </DetailsHeadingDiv>
-      {shownCountry === undefined ?
+      {country === undefined ?
         <LoadingInfoStyled>
           <Box sx={{ display: 'flex' }}>
             <CircularProgress />
           </Box>
         </LoadingInfoStyled> : <CountryDetailsDiv>
           <Flag>
-            <img src={shownCountry?.flag}></img>
+            <img src={country?.flag}></img>
           </Flag>
 
           <Details>
-            <h1>{shownCountry?.name}</h1>
+            <h1>{country?.name}</h1>
             <Statistics>
               <ul>
                 <li>
-                  <span>Population:</span> {shownCountry?.population}
+                  <span>Population:</span> {country?.population}
                 </li>
                 <li>
-                  <span>Region:</span> {shownCountry?.region}
+                  <span>Region:</span> {country?.region}
                 </li>
                 <li>
-                  <span>Sub region:</span> {shownCountry?.details.subRegion}
+                  <span>Sub region:</span> {country?.details.subRegion}
                 </li>
                 <li>
-                  <span>Capital:</span> {shownCountry?.capital}
+                  <span>Capital:</span> {country?.capital}
                 </li>
               </ul>
 
               <ul>
                 <li>
-                  <span>Status:</span> {shownCountry?.details.status}
+                  <span>Status:</span> {country?.details.status}
                 </li>
 
                 {currencies ? (

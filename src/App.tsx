@@ -10,29 +10,17 @@ import { useEffect } from "react";
 import { ALL_FLAGS_API_URL } from "./constants/API_URL";
 import { fetchData } from "./utils/FetchData";
 import { CountryInterface } from "./interfaces/CountriesInterface";
-import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "./redux/Store";
-import { fetchCountries } from "./redux/slices/CountriesSlice";
 import NotFount from "./components/NotFound";
 
 
 function App() {
   const [theme, setTheme] = useState("light");
   const [loading, setLoading] = useState(true);
-
-  const dispatch = useDispatch();
-
-  const getCountries = (countries: CountryInterface[]) => {
-    dispatch(fetchCountries({ countries }));
-  };
+  const [countries, setCountries] = useState<CountryInterface[]>([])
 
   useEffect(() => {
-    fetchData(ALL_FLAGS_API_URL, getCountries, setLoading);
+    fetchData(ALL_FLAGS_API_URL, setCountries, setLoading);
   }, []);
-
-  const countries = useSelector(
-    (state: RootState) => state.countries.countries
-  ); //These are all countries fetched from API.
 
   const changeTheme = () => {
     theme === "light" ? setTheme("dark") : setTheme("light");

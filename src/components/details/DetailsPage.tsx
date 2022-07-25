@@ -15,6 +15,7 @@ import Box from '@mui/material/Box';
 import {
   LoadingInfoStyled,
 } from "../main/mainPage.styled";
+import { noDataProvided } from "./helpers";
 
 const DetailsPage: React.FC = () => {
   const { countryName } = useParams();
@@ -94,9 +95,7 @@ const DetailsPage: React.FC = () => {
                     })}
                   </div>
                 ) : (
-                  <li>
-                    <span>No data provided</span>
-                  </li>
+                  noDataProvided()
                 )}
 
                 {languages ? (
@@ -113,9 +112,7 @@ const DetailsPage: React.FC = () => {
                     })}
                   </div>
                 ) : (
-                  <li>
-                    <span>No data provided</span>
-                  </li>
+                  noDataProvided()
                 )}
               </ul>
             </Statistics>

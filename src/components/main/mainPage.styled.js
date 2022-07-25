@@ -23,6 +23,11 @@ export const MainPageSearchStyled = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
+  background-color: ${({ theme }) => theme.background.container};
+  position: sticky;
+  top: 0;
+  padding-top: 3vh;
+  padding-bottom: 3vh;
 
   @media screen and (max-width: 700px) {
     flex-direction: column;

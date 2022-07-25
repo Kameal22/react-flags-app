@@ -18,14 +18,20 @@ import { useEffect, useState } from "react";
 import { CountryInterface } from "../../interfaces/CountriesInterface";
 import { fetchSingleCountry } from "../../utils/FetchSingleCountry";
 import { SINGLE_FLAG_URL } from "../../constants/API_URL";
+import { useNavigate } from "react-router-dom";
 
 const DetailsPage: React.FC = () => {
   const [country, setCountry] = useState<CountryInterface>();
 
+  const navigate = useNavigate();
   const { countryName } = useParams();
 
+  const redirectOnError = () => {
+    return navigate('/', { replace: true })
+  }
+
   useEffect(() => {
-    fetchSingleCountry(`${SINGLE_FLAG_URL}/${countryName}`, setCountry)
+    fetchSingleCountry(`${SINGLE_FLAG_URL}/${countryName}`, setCountry, redirectOnError)
   }, [])
 
   const currencies = country?.details.currencies;
@@ -48,7 +54,7 @@ const DetailsPage: React.FC = () => {
           </button>
         </Link>
       </DetailsHeadingDiv>
-      {country === undefined ?
+      {!country ?
         <LoadingInfoStyled>
           <Box sx={{ display: 'flex' }}>
             <CircularProgress />

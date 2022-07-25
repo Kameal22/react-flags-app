@@ -13,6 +13,7 @@ import { CountryInterface } from "./interfaces/CountriesInterface";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "./redux/Store";
 import { fetchCountries } from "./redux/slices/CountriesSlice";
+import NotFount from "./components/NotFound";
 
 
 function App() {
@@ -39,12 +40,13 @@ function App() {
 
   return (
     <ThemeProvider theme={theme === "light" ? lightTheme : darkTheme}>
+      <GlobalStyles />
       <BrowserRouter>
-        <GlobalStyles />
         <Nav toggleDarkMode={changeTheme} theme={theme} />
         <Routes>
           <Route path="/" element={<MainPage loading={loading} countries={countries} />} />
-          <Route path="/:countryName" element={<DetailsPage />} />
+          <Route path="/country/:countryName" element={<DetailsPage />} />
+          <Route path="*" element={<NotFount />} />
         </Routes>
       </BrowserRouter>
     </ThemeProvider>

@@ -6,7 +6,6 @@ import {
   Flag,
   Details,
   Statistics,
-  BorderCountries,
 } from "./detailsPage.styled";
 import { useSelector } from "react-redux";
 import { RootState } from "../../redux/Store";
@@ -28,12 +27,6 @@ const DetailsPage: React.FC = () => {
 
   const currencies = shownCountry?.details.currencies;
   const languages = shownCountry?.details.languages;
-
-  useEffect(() => {
-    if (!shownCountry) {
-      navigate(`/`, { replace: true });
-    }
-  }, [shownCountry])
 
   return (
     <DetailsStyledDiv>
@@ -119,7 +112,6 @@ const DetailsPage: React.FC = () => {
               )}
             </ul>
           </Statistics>
-          <BorderCountries></BorderCountries>
         </Details>
       </CountryDetailsDiv>
     </DetailsStyledDiv>

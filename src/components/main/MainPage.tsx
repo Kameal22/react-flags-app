@@ -24,6 +24,8 @@ const MainPage: React.FC<Props> = ({ loading, countries }) => {
   const [countryName, searchCountryName] = useState("");
   const [chosenRegion, setChosenRegion] = useState("");
 
+  const [fetchingAllowed, setFetchingAllowed] = useState(true);
+
   useEffect(() => {
     setCountriesOnScreen(countries.slice(0, 20)) // Set first 20 countries on page load.
   }, [countries])
@@ -37,9 +39,18 @@ const MainPage: React.FC<Props> = ({ loading, countries }) => {
 
   const searchCountries = () => {
     if (!chosenRegion) {
+      if (countryName) {
+        setFetchingAllowed(false)
+        return countries.filter(country => country.name.toLowerCase().includes(countryName.toLowerCase()))
+      }
       return countriesOnScreen.filter(country => country.name.toLowerCase().includes(countryName.toLowerCase()))
     } else {
-      return countriesOnScreen.filter(country => country.name.toLowerCase().includes(countryName.toLowerCase()) && country.region.toLowerCase() === chosenRegion.toLowerCase())
+      if (countryName) {
+        setFetchingAllowed(false)
+        return countries.filter(country => country.name.toLowerCase().includes(countryName.toLowerCase()) && country.region.toLowerCase() === chosenRegion.toLowerCase())
+      } else {
+        return countriesOnScreen.filter(country => country.name.toLowerCase().includes(countryName.toLowerCase()) && country.region.toLowerCase() === chosenRegion.toLowerCase())
+      }
     }
   };
 
@@ -80,8 +91,8 @@ const MainPage: React.FC<Props> = ({ loading, countries }) => {
             );
           })}
         </MainPageCountriesStyled>
-        <Waypoint onEnter={fetchMoreCountries}>
-        </Waypoint>
+        {fetchingAllowed && <Waypoint onEnter={fetchMoreCountries} />}
+
       </MainPageStyled>
     );
   }

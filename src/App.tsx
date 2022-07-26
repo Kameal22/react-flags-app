@@ -11,10 +11,11 @@ import { ALL_FLAGS_API_URL } from "./constants/API_URL";
 import { fetchData } from "./utils/FetchData";
 import { CountryInterface } from "./interfaces/CountriesInterface";
 import NotFount from "./components/NotFound";
+import { useLocalStorage } from "./hooks/useLocalStorage";
 
 
 function App() {
-  const [theme, setTheme] = useState("light");
+  const [theme, setTheme] = useLocalStorage("light", "light");
   const [loading, setLoading] = useState(true);
   const [countries, setCountries] = useState<CountryInterface[]>([])
 

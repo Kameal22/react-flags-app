@@ -45,7 +45,7 @@ const MainPage: React.FC<Props> = ({ loading, countries }) => {
       }
       setFetchingAllowed(true)
       return countriesOnScreen.filter(country => country.name.toLowerCase().includes(countryName.toLowerCase()))
-    } else { // If region is chosen
+    } else { // If region is chosen I don't allow user to fetch more data = You just search by what you have already.
       if (countryName) {
         setFetchingAllowed(false)
         return countries.filter(country => country.name.toLowerCase().includes(countryName.toLowerCase()) && country.region.toLowerCase() === chosenRegion.toLowerCase())

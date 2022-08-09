@@ -34,7 +34,7 @@ function App() {
         <Nav toggleDarkMode={changeTheme} theme={theme} />
         <Routes>
           <Route path="/" element={<MainPage loading={loading} countries={countries} />} />
-          <Route path="/country/:countryName" element={<DetailsPage />} />
+          <Route path="/country/:countryName" element={<DetailsPage countries={countries} />} />
           <Route path="*" element={<NotFount />} />
         </Routes>
       </BrowserRouter>

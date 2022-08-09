@@ -20,25 +20,42 @@ import { fetchSingleCountry } from "../../utils/FetchSingleCountry";
 import { SINGLE_FLAG_URL } from "../../constants/API_URL";
 import { useNavigate } from "react-router-dom";
 
-const DetailsPage: React.FC = () => {
+interface Props {
+  countries: CountryInterface[]
+}
+
+const DetailsPage: React.FC<Props> = ({ countries }) => {
   const [country, setCountry] = useState<CountryInterface>();
 
   const navigate = useNavigate();
   const { countryName } = useParams();
 
+  useEffect(() => {
+    fetchSingleCountry(`${SINGLE_FLAG_URL}/${countryName}`, setCountry, redirectOnError)
+  }, [countryName])
+
+  const currentCountryIdx = countries.findIndex(country => country.name === countryName);
+
   const redirectOnError = () => {
     return navigate('/', { replace: true })
   }
 
-  useEffect(() => {
-    fetchSingleCountry(`${SINGLE_FLAG_URL}/${countryName}`, setCountry, redirectOnError)
-  }, [])
+  const findPreviousCountry = () => {
+    const previous = countries[currentCountryIdx - 1]
+    return navigate(`/country/${previous.name}`, { replace: true })
+  }
+
+  const findNextCountry = () => {
+    const next = countries[currentCountryIdx + 1]
+    return navigate(`/country/${next.name}`, { replace: true })
+  }
 
   const currencies = country?.details.currencies;
   const languages = country?.details.languages;
 
   return (
     <DetailsStyledDiv>
+      <p onClick={findPreviousCountry}>Left arrow</p>
       <DetailsHeadingDiv>
         <Link
           style={{
@@ -124,6 +141,7 @@ const DetailsPage: React.FC = () => {
             </Statistics>
           </Details>
         </CountryDetailsDiv>}
+      <p onClick={findNextCountry}>right arrow</p>
     </DetailsStyledDiv>
   );
 };

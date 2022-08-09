@@ -43,12 +43,14 @@ const MainPage: React.FC<Props> = ({ loading, countries }) => {
         setFetchingAllowed(false)
         return countries.filter(country => country.name.toLowerCase().includes(countryName.toLowerCase()))
       }
+      setFetchingAllowed(true)
       return countriesOnScreen.filter(country => country.name.toLowerCase().includes(countryName.toLowerCase()))
-    } else {
+    } else { // If region is chosen
       if (countryName) {
         setFetchingAllowed(false)
         return countries.filter(country => country.name.toLowerCase().includes(countryName.toLowerCase()) && country.region.toLowerCase() === chosenRegion.toLowerCase())
       } else {
+        setFetchingAllowed(false)
         return countriesOnScreen.filter(country => country.name.toLowerCase().includes(countryName.toLowerCase()) && country.region.toLowerCase() === chosenRegion.toLowerCase())
       }
     }
@@ -61,41 +63,38 @@ const MainPage: React.FC<Props> = ({ loading, countries }) => {
     countriesOnScreen,
   ]);
 
-  if (loading) {
-    return (
-      <LoadingInfoStyled>
-        <Box sx={{ display: 'flex' }}>
-          <CircularProgress />
-        </Box>
-      </LoadingInfoStyled>
-    )
-  } else {
-    return (
-      <MainPageStyled>
-        <MainPageSearchStyled>
-          <Search value={countryName} changeValue={searchCountryName} />
-          <Filter value={chosenRegion} changeValue={setChosenRegion} />
-        </MainPageSearchStyled>
-        <MainPageCountriesStyled>
-          {filteredCountries.map((country) => {
-            return (
-              <Country
-                key={country.name}
-                flag={country.flag}
-                name={country.name}
-                region={country.region}
-                population={country.population}
-                capital={country.capital}
-                details={country.details}
-              />
-            );
-          })}
-        </MainPageCountriesStyled>
-        {fetchingAllowed && <Waypoint onEnter={fetchMoreCountries} />}
+  return (
+    <MainPageStyled>
+      {loading &&
+        <LoadingInfoStyled>
+          <Box sx={{ display: 'flex' }}>
+            <CircularProgress />
+          </Box>
+        </LoadingInfoStyled>
+      }
+      <MainPageSearchStyled>
+        <Search value={countryName} changeValue={searchCountryName} />
+        <Filter value={chosenRegion} changeValue={setChosenRegion} />
+      </MainPageSearchStyled>
+      <MainPageCountriesStyled>
+        {filteredCountries.map((country) => {
+          return (
+            <Country
+              key={country.name}
+              flag={country.flag}
+              name={country.name}
+              region={country.region}
+              population={country.population}
+              capital={country.capital}
+              details={country.details}
+            />
+          );
+        })}
+      </MainPageCountriesStyled>
+      {fetchingAllowed && <Waypoint onEnter={fetchMoreCountries} />}
 
-      </MainPageStyled>
-    );
-  }
-};
+    </MainPageStyled>
+  );
+}
 
 export default MainPage;

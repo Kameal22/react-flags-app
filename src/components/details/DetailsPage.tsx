@@ -21,7 +21,7 @@ import { CountryInterface } from "../../interfaces/CountriesInterface";
 import { fetchSingleCountry } from "../../utils/FetchSingleCountry";
 import { SINGLE_FLAG_URL } from "../../constants/API_URL";
 import { useNavigate } from "react-router-dom";
-import { useSpring, animated } from 'react-spring';
+import { useSpring } from 'react-spring';
 
 interface Props {
   countries: CountryInterface[]
@@ -36,7 +36,7 @@ const DetailsPage: React.FC<Props> = ({ countries }) => {
   const props = useSpring({
     to: { opacity: 1 },
     from: { opacity: 0 },
-    config: { duration: 1000 }
+    config: { duration: 1200 }
   })
 
   useEffect(() => {
@@ -64,9 +64,13 @@ const DetailsPage: React.FC<Props> = ({ countries }) => {
 
   return (
     <DetailsStyledDiv>
-      <PreviousCountry>
-        <i onClick={findPreviousCountry} className="bi bi-chevron-left"></i>
-      </PreviousCountry>
+      {countries[currentCountryIdx - 1] === undefined ?
+        null
+        :
+        <PreviousCountry>
+          <i onClick={findPreviousCountry} className="bi bi-chevron-left"></i>
+        </PreviousCountry>}
+
       <DetailsHeadingDiv>
         <Link
           style={{
@@ -154,9 +158,13 @@ const DetailsPage: React.FC<Props> = ({ countries }) => {
             </Statistics>
           </Details>
         </CountryDetailsDiv>}
-      <NextCountry>
-        <i onClick={findNextCountry} className="bi bi-chevron-right"></i>
-      </NextCountry>
+      {countries[currentCountryIdx + 1] === undefined ?
+        null
+        :
+        <NextCountry>
+          <i onClick={findNextCountry} className="bi bi-chevron-right"></i>
+        </NextCountry>}
+
     </DetailsStyledDiv>
   );
 };

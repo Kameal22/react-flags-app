@@ -6,6 +6,8 @@ import {
   Flag,
   Details,
   Statistics,
+  PreviousCountry,
+  NextCountry,
 } from "./detailsPage.styled";
 import { Link } from "react-router-dom";
 import CircularProgress from '@mui/material/CircularProgress';
@@ -19,6 +21,7 @@ import { CountryInterface } from "../../interfaces/CountriesInterface";
 import { fetchSingleCountry } from "../../utils/FetchSingleCountry";
 import { SINGLE_FLAG_URL } from "../../constants/API_URL";
 import { useNavigate } from "react-router-dom";
+import { useSpring, animated } from 'react-spring';
 
 interface Props {
   countries: CountryInterface[]
@@ -29,6 +32,12 @@ const DetailsPage: React.FC<Props> = ({ countries }) => {
 
   const navigate = useNavigate();
   const { countryName } = useParams();
+
+  const props = useSpring({
+    to: { opacity: 1 },
+    from: { opacity: 0 },
+    config: { duration: 1000 }
+  })
 
   useEffect(() => {
     fetchSingleCountry(`${SINGLE_FLAG_URL}/${countryName}`, setCountry, redirectOnError)
@@ -55,7 +64,9 @@ const DetailsPage: React.FC<Props> = ({ countries }) => {
 
   return (
     <DetailsStyledDiv>
-      <p onClick={findPreviousCountry}>Left arrow</p>
+      <PreviousCountry>
+        <i onClick={findPreviousCountry} className="bi bi-chevron-left"></i>
+      </PreviousCountry>
       <DetailsHeadingDiv>
         <Link
           style={{
@@ -76,7 +87,9 @@ const DetailsPage: React.FC<Props> = ({ countries }) => {
           <Box sx={{ display: 'flex' }}>
             <CircularProgress />
           </Box>
-        </LoadingInfoStyled> : <CountryDetailsDiv>
+        </LoadingInfoStyled>
+        :
+        <CountryDetailsDiv style={props}>
           <Flag>
             <img src={country?.flag}></img>
           </Flag>
@@ -141,7 +154,9 @@ const DetailsPage: React.FC<Props> = ({ countries }) => {
             </Statistics>
           </Details>
         </CountryDetailsDiv>}
-      <p onClick={findNextCountry}>right arrow</p>
+      <NextCountry>
+        <i onClick={findNextCountry} className="bi bi-chevron-right"></i>
+      </NextCountry>
     </DetailsStyledDiv>
   );
 };

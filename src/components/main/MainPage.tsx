@@ -5,6 +5,7 @@ import {
   MainPageSearchStyled,
   MainPageCountriesStyled,
   LoadingInfoStyled,
+  ToggleFilters,
 } from "./mainPage.styled";
 import { useEffect, useMemo, useState } from "react";
 import { CountryInterface } from "../../interfaces/CountriesInterface";
@@ -12,6 +13,7 @@ import Country from "../countries/Country";
 import { Waypoint } from "react-waypoint";
 import CircularProgress from '@mui/material/CircularProgress';
 import Box from '@mui/material/Box';
+import useToggle from "../../hooks/useToggle";
 
 interface Props {
   loading: boolean;
@@ -23,6 +25,8 @@ const MainPage: React.FC<Props> = ({ loading, countries }) => {
 
   const [countryName, searchCountryName] = useState("");
   const [chosenRegion, setChosenRegion] = useState("");
+
+  const [searchingOrFiltering, toggleSearchingOrFiltering] = useToggle(false);
 
   const [fetchingAllowed, setFetchingAllowed] = useState(true);
 
@@ -73,8 +77,13 @@ const MainPage: React.FC<Props> = ({ loading, countries }) => {
         </LoadingInfoStyled>
       }
       <MainPageSearchStyled>
-        <Search value={countryName} changeValue={searchCountryName} />
-        <Filter value={chosenRegion} changeValue={setChosenRegion} />
+        {searchingOrFiltering &&
+          <>
+            <Search value={countryName} changeValue={searchCountryName} />
+            <Filter value={chosenRegion} changeValue={setChosenRegion} />
+          </>
+        }
+        <ToggleFilters onClick={toggleSearchingOrFiltering}>{searchingOrFiltering ? 'Hide filters' : 'Show filters'}</ToggleFilters>
       </MainPageSearchStyled>
       <MainPageCountriesStyled>
         {filteredCountries.map((country) => {

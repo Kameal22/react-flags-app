@@ -7,6 +7,17 @@ export const LoadingInfoStyled = styled.div`
   transform: translate(-50%, -50%);
 `;
 
+export const ToggleFilters = styled.p`
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  &:hover {
+    cursor: pointer;
+  }
+`;
+
 export const MainPageStyled = styled.div`
   padding-top: 6vh;
   padding-bottom: 6vh;
@@ -31,6 +42,9 @@ export const MainPageSearchStyled = styled.div`
 
   @media screen and (max-width: 700px) {
     flex-direction: column;
+    padding-top: 2vh;
+    padding-bottom: 2vh;
+    gap: 2vh;
   }
 `;
 

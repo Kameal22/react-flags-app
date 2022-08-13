@@ -14,6 +14,7 @@ import { Waypoint } from "react-waypoint";
 import CircularProgress from '@mui/material/CircularProgress';
 import Box from '@mui/material/Box';
 import useToggle from "../../hooks/useToggle";
+import { FilterCountries } from "../../utils/FilterCountries"
 
 interface Props {
   loading: boolean;
@@ -45,10 +46,10 @@ const MainPage: React.FC<Props> = ({ loading, countries }) => {
     if (!chosenRegion) {
       if (countryName) {
         setFetchingAllowed(false)
-        return countries.filter(country => country.name.toLowerCase().includes(countryName.toLowerCase()))
+        return FilterCountries(countries, countryName)
       }
       setFetchingAllowed(true)
-      return countriesOnScreen.filter(country => country.name.toLowerCase().includes(countryName.toLowerCase()))
+      return FilterCountries(countriesOnScreen, countryName)
     } else { // If region is chosen I don't allow user to fetch more data = You just search by what you have already.
       if (countryName) {
         setFetchingAllowed(false)

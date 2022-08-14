@@ -44,18 +44,20 @@ const MainPage: React.FC<Props> = ({ loading, countries }) => {
 
   const searchCountries = () => {
     if (!chosenRegion) {
+
       if (countryName) {
         setFetchingAllowed(false)
         return FilterCountries(countries, countryName)
       }
       setFetchingAllowed(true)
       return FilterCountries(countriesOnScreen, countryName)
-    } else { // If region is chosen I don't allow user to fetch more data = You just search by what you have already.
+
+    } else {
+      setFetchingAllowed(false)
       if (countryName) {
-        setFetchingAllowed(false)
         return FilterCountries(countries, countryName, chosenRegion)
-      } else {
-        setFetchingAllowed(false)
+      }
+      else {
         return FilterCountries(countriesOnScreen, countryName, chosenRegion)
       }
     }

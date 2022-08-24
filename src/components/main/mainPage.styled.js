@@ -1,10 +1,21 @@
 import styled from "styled-components";
 
-export const LoadingInfoStyled = styled.h1`
+export const LoadingInfoStyled = styled.div`
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+`;
+
+export const ToggleFilters = styled.p`
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  &:hover {
+    cursor: pointer;
+  }
 `;
 
 export const MainPageStyled = styled.div`
@@ -23,9 +34,17 @@ export const MainPageSearchStyled = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
+  background-color: ${({ theme }) => theme.background.container};
+  position: sticky;
+  top: 0;
+  padding-top: 3vh;
+  padding-bottom: 3vh;
 
   @media screen and (max-width: 700px) {
     flex-direction: column;
+    padding-top: 2vh;
+    padding-bottom: 2vh;
+    gap: 2vh;
   }
 `;
 

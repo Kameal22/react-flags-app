@@ -19,10 +19,8 @@ const Filter: React.FC<Props> = ({ changeValue, value }) => {
     changeValue(e.currentTarget.value);
   };
 
-
-
   const resetForm = () => {
-    setFormValue("FilterByRegion");
+    setFormValue("Filter by Region");
     changeValue("")
   }
 

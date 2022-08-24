@@ -6,39 +6,71 @@ import {
   Flag,
   Details,
   Statistics,
-  BorderCountries,
+  PreviousCountry,
+  NextCountry,
 } from "./detailsPage.styled";
-import { useSelector } from "react-redux";
-import { RootState } from "../../redux/Store";
 import { Link } from "react-router-dom";
-import { useEffect } from "react";
+import CircularProgress from '@mui/material/CircularProgress';
+import Box from '@mui/material/Box';
+import {
+  LoadingInfoStyled,
+} from "../main/mainPage.styled";
+import { noDataProvided } from "./helpers";
+import { useEffect, useState } from "react";
+import { CountryInterface } from "../../interfaces/CountriesInterface";
+import { fetchSingleCountry } from "../../utils/FetchSingleCountry";
+import { SINGLE_FLAG_URL } from "../../constants/API_URL";
 import { useNavigate } from "react-router-dom";
+import { useSpring } from 'react-spring';
 
-const DetailsPage: React.FC = () => {
-  const { countryName } = useParams();
+interface Props {
+  countries: CountryInterface[]
+}
+
+const DetailsPage: React.FC<Props> = ({ countries }) => {
+  const [country, setCountry] = useState<CountryInterface>();
+
   const navigate = useNavigate();
+  const { countryName } = useParams();
 
-  const countries = useSelector(
-    (state: RootState) => state.countries.countries
-  );
-
-  const shownCountry = countries.find(
-    (country) => country.name === countryName
-  );
-
-  const currencies = shownCountry?.details.currencies;
-  const languages = shownCountry?.details.languages;
-
-  console.log(shownCountry)
+  const props = useSpring({
+    to: { opacity: 1 },
+    from: { opacity: 0 },
+    config: { duration: 1200 }
+  })
 
   useEffect(() => {
-    if (!shownCountry) {
-      navigate(`/`, { replace: true });
-    }
-  }, [shownCountry])
+    fetchSingleCountry(`${SINGLE_FLAG_URL}/${countryName}`, setCountry, redirectOnError)
+  }, [countryName])
+
+  const currentCountryIdx = countries.findIndex(country => country.name === countryName);
+
+  const redirectOnError = () => {
+    return navigate('/', { replace: true })
+  }
+
+  const findPreviousCountry = () => {
+    const previous = countries[currentCountryIdx - 1]
+    return navigate(`/country/${previous.name}`, { replace: true })
+  }
+
+  const findNextCountry = () => {
+    const next = countries[currentCountryIdx + 1]
+    return navigate(`/country/${next.name}`, { replace: true })
+  }
+
+  const currencies = country?.details.currencies;
+  const languages = country?.details.languages;
 
   return (
     <DetailsStyledDiv>
+      {countries[currentCountryIdx - 1] === undefined ?
+        null
+        :
+        <PreviousCountry>
+          <i onClick={findPreviousCountry} className="bi bi-chevron-left"></i>
+        </PreviousCountry>}
+
       <DetailsHeadingDiv>
         <Link
           style={{
@@ -54,76 +86,85 @@ const DetailsPage: React.FC = () => {
           </button>
         </Link>
       </DetailsHeadingDiv>
-      <CountryDetailsDiv>
-        <Flag>
-          <img src={shownCountry?.flag}></img>
-        </Flag>
+      {!country ?
+        <LoadingInfoStyled>
+          <Box sx={{ display: 'flex' }}>
+            <CircularProgress />
+          </Box>
+        </LoadingInfoStyled>
+        :
+        <CountryDetailsDiv style={props}>
+          <Flag>
+            <img src={country?.flag}></img>
+          </Flag>
 
-        <Details>
-          <h1>{shownCountry?.name}</h1>
-          <Statistics>
-            <ul>
-              <li>
-                <span>Population:</span> {shownCountry?.population}
-              </li>
-              <li>
-                <span>Region:</span> {shownCountry?.region}
-              </li>
-              <li>
-                <span>Sub region:</span> {shownCountry?.details.subRegion}
-              </li>
-              <li>
-                <span>Capital:</span> {shownCountry?.capital}
-              </li>
-            </ul>
-
-            <ul>
-              <li>
-                <span>Status:</span> {shownCountry?.details.status}
-              </li>
-
-              {currencies ? (
-                <div>
-                  <li>
-                    <span>Currencies:</span>
-                  </li>
-                  {Object.values(currencies).map((currency) => {
-                    return (
-                      <li key={currency.name} style={{ marginLeft: ".3em" }}>
-                        {currency.name}
-                      </li>
-                    );
-                  })}
-                </div>
-              ) : (
+          <Details>
+            <h1>{country?.name}</h1>
+            <Statistics>
+              <ul>
                 <li>
-                  <span>No data provided</span>
+                  <span>Population:</span> {country?.population}
                 </li>
-              )}
-
-              {languages ? (
-                <div>
-                  <li>
-                    <span>Languages:</span>
-                  </li>
-                  {Object.values(languages).map((lang) => {
-                    return (
-                      <li key={lang} style={{ marginLeft: ".3em" }}>
-                        {lang}
-                      </li>
-                    );
-                  })}
-                </div>
-              ) : (
                 <li>
-                  <span>No data provided</span>
+                  <span>Region:</span> {country?.region}
                 </li>
-              )}
-            </ul>
-          </Statistics>
-          <BorderCountries></BorderCountries>
-        </Details>
-      </CountryDetailsDiv>
+                <li>
+                  <span>Sub region:</span> {country?.details.subRegion}
+                </li>
+                <li>
+                  <span>Capital:</span> {country?.capital}
+                </li>
+              </ul>
+
+              <ul>
+                <li>
+                  <span>Status:</span> {country?.details.status}
+                </li>
+
+                {currencies ? (
+                  <div>
+                    <li>
+                      <span>Currencies:</span>
+                    </li>
+                    {Object.values(currencies).map((currency) => {
+                      return (
+                        <li key={currency.name} style={{ marginLeft: ".3em" }}>
+                          {currency.name}
+                        </li>
+                      );
+                    })}
+                  </div>
+                ) : (
+                  noDataProvided()
+                )}
+
+                {languages ? (
+                  <div>
+                    <li>
+                      <span>Languages:</span>
+                    </li>
+                    {Object.values(languages).map((lang) => {
+                      return (
+                        <li key={lang} style={{ marginLeft: ".3em" }}>
+                          {lang}
+                        </li>
+                      );
+                    })}
+                  </div>
+                ) : (
+                  noDataProvided()
+                )}
+              </ul>
+            </Statistics>
+          </Details>
+        </CountryDetailsDiv>}
+      {countries[currentCountryIdx + 1] === undefined ?
+        null
+        :
+        <NextCountry>
+          <i onClick={findNextCountry} className="bi bi-chevron-right"></i>
+        </NextCountry>}
+
     </DetailsStyledDiv>
   );
 };

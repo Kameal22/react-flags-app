@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { animated } from "react-spring";
 
 export const DetailsStyledDiv = styled.div`
   width: 100%;
@@ -7,6 +8,26 @@ export const DetailsStyledDiv = styled.div`
   color: ${({ theme }) => theme.textColor.container};
   position: relative;
   overflow: auto;
+`;
+
+export const PreviousCountry = styled.div`
+  position: absolute;
+  top: 50%;
+  left: 1%;
+
+  i {
+    cursor: pointer;
+  }
+`;
+
+export const NextCountry = styled.div`
+  position: absolute;
+  top: 50%;
+  right: 1%;
+
+  i {
+    cursor: pointer;
+  }
 `;
 
 export const DetailsHeadingDiv = styled.div`
@@ -53,7 +74,7 @@ export const DetailsHeadingDiv = styled.div`
   }
 `;
 
-export const CountryDetailsDiv = styled.div`
+export const CountryDetailsDiv = styled(animated.div)`
   width: 85%;
   height: 450px;
   position: absolute;

@@ -1,9 +1,9 @@
 import axios from "axios";
 import { CountryInterface } from "../interfaces/CountriesInterface";
 
-export const fetchData = async (URL: string, setCountries: (countries: CountryInterface[]) => void, setLoading: React.Dispatch<React.SetStateAction<boolean>>) => {
+export const fetchData = async (URL: string, setCountries: React.Dispatch<React.SetStateAction<CountryInterface[]>>, setLoading: React.Dispatch<React.SetStateAction<boolean>>) => {
     const response = await axios.get(URL);
-    const fetchedCountries = response.data.slice(0, 20)
+    const fetchedCountries = response.data
 
     const Countries: CountryInterface[] = []
 

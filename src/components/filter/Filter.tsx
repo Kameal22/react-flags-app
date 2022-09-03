@@ -36,11 +36,11 @@ const Filter: React.FC<Props> = ({ changeValue, value }) => {
           </option>
         ))}
       </SelectStyled>
-      {value ? (
+      {value &&
         <ResetFiltersStyled onClick={() => resetForm()}>
           Reset filters
         </ResetFiltersStyled>
-      ) : null}
+      }
     </FilterStyledDiv>
   );
 };

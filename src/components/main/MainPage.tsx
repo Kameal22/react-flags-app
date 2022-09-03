@@ -1,4 +1,4 @@
-import Filter from "../filter/Filter";
+import FilterRegion from "../filter/FilterRegion";
 import Search from "../search/Search";
 import {
   MainPageStyled,
@@ -83,7 +83,7 @@ const MainPage: React.FC<Props> = ({ loading, countries }) => {
         {searchingOrFiltering &&
           <>
             <Search value={countryName} changeValue={searchCountryName} />
-            <Filter value={chosenRegion} changeValue={setChosenRegion} />
+            <FilterRegion value={chosenRegion} changeValue={setChosenRegion} />
           </>
         }
         <ToggleFilters onClick={toggleSearchingOrFiltering}>{searchingOrFiltering ? 'Hide filters' : 'Show filters'}</ToggleFilters>

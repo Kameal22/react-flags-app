@@ -11,7 +11,7 @@ interface Props {
   changeValue: React.Dispatch<React.SetStateAction<string>>;
 }
 
-const Filter: React.FC<Props> = ({ changeValue, value }) => {
+const FilterRegion: React.FC<Props> = ({ changeValue, value }) => {
   const [formValue, setFormValue] = useState("Filter by Region");
 
   const handleChange = (e: React.FormEvent<HTMLSelectElement>) => {
@@ -45,4 +45,4 @@ const Filter: React.FC<Props> = ({ changeValue, value }) => {
   );
 };
 
-export default Filter;
+export default FilterRegion;

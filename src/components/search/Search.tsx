@@ -21,7 +21,7 @@ const Search: React.FC<Props> = ({ value, changeValue }) => {
           type="text"
           placeholder="Search for a country"
         />
-        <i className="bi bi-search"></i>
+        <i className="bi bi-search" />
       </FormStyled>
     </SearchStyled>
   );

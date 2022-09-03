@@ -22,6 +22,10 @@ export const NavStyled = styled.div`
     @media screen and (max-width: 750px) {
       width: 50%;
     }
+
+    @media screen and (max-width: 689px) {
+      width: 70%;
+    }
   }
   h1 {
     font-size: 1.4rem;

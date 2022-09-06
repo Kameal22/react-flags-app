@@ -7,8 +7,8 @@ interface Props {
 
 const DarkModeToggler: React.FC<Props> = ({ toggleDarkMode, theme }) => {
     return (
-        <Toggler onClick={() => toggleDarkMode()}>
-            {theme === "light" ? <i className="bi bi-moon"></i> : <i className="bi bi-moon-fill"></i>}
+        <Toggler onClick={toggleDarkMode}>
+            {theme === "light" ? <i className="bi bi-moon" /> : <i className="bi bi-moon-fill" />}
             <p>Dark mode</p>
         </Toggler>
     )

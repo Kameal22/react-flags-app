@@ -1,15 +1,15 @@
 import styled from "styled-components";
 
 export const FilterStyledDiv = styled.div`
-  width: 16%;
+  width: 22%;
   position: relative;
 
   @media screen and (max-width: 800px) {
-    width: 25%;
+    width: 35%;
   }
 
   @media screen and (max-width: 700px) {
-    width: 60%;
+    width: 80%;
     margin-top: 2vh;
   }
 `;

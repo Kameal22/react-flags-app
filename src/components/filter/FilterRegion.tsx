@@ -37,7 +37,7 @@ const FilterRegion: React.FC<Props> = ({ changeValue, value }) => {
         ))}
       </SelectStyled>
       {value &&
-        <ResetFiltersStyled onClick={() => resetForm()}>
+        <ResetFiltersStyled onClick={resetForm}>
           Reset filters
         </ResetFiltersStyled>
       }

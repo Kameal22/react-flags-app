@@ -23,12 +23,9 @@ interface Props {
 
 const MainPage: React.FC<Props> = ({ loading, countries }) => {
   const [countriesOnScreen, setCountriesOnScreen] = useState<CountryInterface[]>([]);
-
   const [countryName, searchCountryName] = useState("");
   const [chosenRegion, setChosenRegion] = useState("");
-
   const [searchingOrFiltering, toggleSearchingOrFiltering] = useToggle(false);
-
   const [fetchingAllowed, setFetchingAllowed] = useState(true);
 
   useEffect(() => {
@@ -44,7 +41,6 @@ const MainPage: React.FC<Props> = ({ loading, countries }) => {
 
   const searchCountries = () => {
     if (!chosenRegion) {
-
       if (countryName) {
         setFetchingAllowed(false)
         return FilterCountries(countries, countryName)

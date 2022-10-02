@@ -27,7 +27,7 @@ const NotFoundDiv = styled.div`
     }
 `
 
-const NotFount: React.FC = () => {
+const NotFound: React.FC = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -45,4 +45,4 @@ const NotFount: React.FC = () => {
     )
 }
 
-export default NotFount;;
+export default NotFound;

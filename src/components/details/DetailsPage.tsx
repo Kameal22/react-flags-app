@@ -5,7 +5,6 @@ import {
   DetailsHeadingDiv,
   Flag,
   Details,
-  Statistics,
   PreviousCountry,
   NextCountry,
 } from "./detailsPage.styled";
@@ -15,7 +14,7 @@ import Box from '@mui/material/Box';
 import {
   LoadingInfoStyled,
 } from "../main/mainPage.styled";
-import { noDataProvided } from "./helpers";
+import CountryStatistics from "./Statistics";
 import { useEffect, useState } from "react";
 import { CountryInterface } from "../../interfaces/CountriesInterface";
 import { fetchSingleCountry } from "../../utils/FetchSingleCountry";
@@ -68,7 +67,7 @@ const DetailsPage: React.FC<Props> = ({ countries }) => {
         null
         :
         <PreviousCountry>
-          <i onClick={findPreviousCountry} className="bi bi-chevron-left"></i>
+          <i onClick={findPreviousCountry} className="bi bi-chevron-left" />
         </PreviousCountry>}
 
       <DetailsHeadingDiv>
@@ -82,7 +81,7 @@ const DetailsPage: React.FC<Props> = ({ countries }) => {
           to="/"
         >
           <button>
-            Back <i className="bi bi-arrow-left"></i>
+            Back <i className="bi bi-arrow-left" />
           </button>
         </Link>
       </DetailsHeadingDiv>
@@ -95,74 +94,19 @@ const DetailsPage: React.FC<Props> = ({ countries }) => {
         :
         <CountryDetailsDiv style={props}>
           <Flag>
-            <img src={country?.flag}></img>
+            <img src={country?.flag} alt={country?.name} />
           </Flag>
 
           <Details>
             <h1>{country?.name}</h1>
-            <Statistics>
-              <ul>
-                <li>
-                  <span>Population:</span> {country?.population}
-                </li>
-                <li>
-                  <span>Region:</span> {country?.region}
-                </li>
-                <li>
-                  <span>Sub region:</span> {country?.details.subRegion}
-                </li>
-                <li>
-                  <span>Capital:</span> {country?.capital}
-                </li>
-              </ul>
-
-              <ul>
-                <li>
-                  <span>Status:</span> {country?.details.status}
-                </li>
-
-                {currencies ? (
-                  <div>
-                    <li>
-                      <span>Currencies:</span>
-                    </li>
-                    {Object.values(currencies).map((currency) => {
-                      return (
-                        <li key={currency.name} style={{ marginLeft: ".3em" }}>
-                          {currency.name}
-                        </li>
-                      );
-                    })}
-                  </div>
-                ) : (
-                  noDataProvided()
-                )}
-
-                {languages ? (
-                  <div>
-                    <li>
-                      <span>Languages:</span>
-                    </li>
-                    {Object.values(languages).map((lang) => {
-                      return (
-                        <li key={lang} style={{ marginLeft: ".3em" }}>
-                          {lang}
-                        </li>
-                      );
-                    })}
-                  </div>
-                ) : (
-                  noDataProvided()
-                )}
-              </ul>
-            </Statistics>
+            <CountryStatistics country={country} languages={languages} currencies={currencies} />
           </Details>
         </CountryDetailsDiv>}
       {countries[currentCountryIdx + 1] === undefined ?
         null
         :
         <NextCountry>
-          <i onClick={findNextCountry} className="bi bi-chevron-right"></i>
+          <i onClick={findNextCountry} className="bi bi-chevron-right" />
         </NextCountry>}
 
     </DetailsStyledDiv>

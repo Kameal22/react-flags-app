@@ -3,11 +3,11 @@ type SingleCurrency = {
     symbol: string;
 } 
    
-type Currencies = {
+export type Currencies = {
     [key: string]: SingleCurrency;
 } 
 
-type Language = {
+export type Language = {
     name: string;
 }
 
